@@ -56,10 +56,10 @@ public class BallMovement : MonoBehaviour
         if (rb.linearVelocity.magnitude > 0 || standstilltime < StandStillTimeLimit) return;
 
         rb.simulated = true;
-        pos = pos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        pos = Vector2.ClampMagnitude(pos / 5, 1f);
+        Vector2 launchVector = pos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        launchVector = Vector2.ClampMagnitude(launchVector / 5, 1f);
 
-        Debug.Log(pos.magnitude);
-        rb.AddForce(pos * HitForceMultiplier ,ForceMode2D.Impulse);
+        Debug.Log(launchVector.magnitude);
+        rb.AddForce(launchVector * HitForceMultiplier ,ForceMode2D.Impulse);
     }
 }

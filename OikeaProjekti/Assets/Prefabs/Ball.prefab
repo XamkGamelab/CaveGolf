@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitForceMultiplier: 15
-  StandStillSpeedThreshold: 0.5
-  StandStillTimeLimit: 0.936
+  StandStillSpeedThreshold: 0.746
+  StandStillTimeLimit: 0.773
 --- !u!50 &2934255829343426883
 Rigidbody2D:
   serializedVersion: 5

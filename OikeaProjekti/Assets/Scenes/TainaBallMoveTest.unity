@@ -304,26 +304,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Mass
-      value: 0.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_LinearDamping
-      value: 0.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_AngularDamping
-      value: 0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: StandStillLimit
-      value: 0.223
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: StandStillTimeLimit
-      value: 0.936
-      objectReference: {fileID: 0}
     - target: {fileID: 9089597379718440184, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: m_Name
       value: Ball

@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitForceMultiplier: 15
+  StandStillSpeedThreshold: 0.5
+  StandStillTimeLimit: 0.936
 --- !u!50 &2934255829343426883
 Rigidbody2D:
   serializedVersion: 5
@@ -151,9 +153,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 1
-  m_AngularDamping: 1
+  m_Mass: 0.68
+  m_LinearDamping: 0.66
+  m_AngularDamping: 0.44
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

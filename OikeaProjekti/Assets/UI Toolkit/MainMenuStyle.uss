@@ -1,0 +1,10 @@
+.header {
+}
+
+.button {
+    font-size: 60px;
+    -unity-text-align: upper-center;
+    width: 500px;
+    align-self: center;
+    top: 400px;
+}

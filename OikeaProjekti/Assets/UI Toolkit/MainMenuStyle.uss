@@ -6,9 +6,10 @@
     -unity-text-align: upper-center;
     width: 500px;
     align-self: center;
-    top: 400px;
-    margin-top: 25px;
-    margin-right: 25px;
-    margin-bottom: 25px;
-    margin-left: 25px;
+    top: 380px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    background-image: url("project://database/Assets/UI%20Toolkit/nappisprite.png?fileID=2800000&guid=c800108079a35cc4ba2937406263c582&type=3#nappisprite");
 }

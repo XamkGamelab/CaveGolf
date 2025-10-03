@@ -18,6 +18,13 @@
     border-right-color: rgba(55, 55, 55, 0);
     border-top-color: rgba(55, 55, 55, 0);
     border-bottom-color: rgba(55, 55, 55, 0);
+    transition-duration: 0.35s;
+}
+
+.text {
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Berlin-j9029.ttf?fileID=12800000&guid=80c46730f92807242a82c36ba14b6e65&type=3#Berlin-j9029");
+    letter-spacing: 7px;
+    -unity-text-align: upper-center;
 }
 
 .text {
@@ -25,7 +32,7 @@
     letter-spacing: 7px;
 }
 
-.text {
-    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Berlin-j9029.ttf?fileID=12800000&guid=80c46730f92807242a82c36ba14b6e65&type=3#Berlin-j9029");
-    letter-spacing: 7px;
+.button:hover {
+    scale: 1.05 1.05;
+    -unity-background-image-tint-color: rgb(226, 226, 226);
 }

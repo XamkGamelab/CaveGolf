@@ -25,7 +25,7 @@ public class BallMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rb.linearVelocity.magnitude +" " + rb.linearVelocityX+" " + rb.linearVelocityY);
+        //Debug.Log(rb.linearVelocity.magnitude +" " + rb.linearVelocityX+" " + rb.linearVelocityY);
 
         //check if the ball is moving at any considerable speed
         if (rb.linearVelocity.magnitude < StandStillSpeedThreshold  ) {

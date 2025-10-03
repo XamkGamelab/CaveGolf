@@ -9,15 +9,18 @@ public class BInput : MonoBehaviour
     Vector2 pos;
     BallMovement bMove;
     Camera cam;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
         tap = InputSystem.actions.FindAction("Click");
-        Ball = GameObject.FindGameObjectWithTag("Player");
-        bMove = Ball.GetComponent<BallMovement>();
-        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        UpdateReferences();
     }
 
+
+    void UpdateReferences()
+    {
+        bMove = GameObject.FindGameObjectWithTag("Player").GetComponent<BallMovement>();
+        cam = GameObject.FindFirstObjectByType<Camera>();
+    }
     // Update is called once per frame
     void Update()
     {

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2934255829343426883}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 9089597379718440184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.67, y: -0.11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.4407, y: -0.3393, z: 0}
+  m_LocalScale: {x: 0.5414, y: 0.5414, z: 0.5414}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -138,6 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7cc70a76d1103942926c064d609cf18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HitForceMultiplier: 15
+  StandStillSpeedThreshold: 0.746
+  StandStillTimeLimit: 0.773
 --- !u!50 &2934255829343426883
 Rigidbody2D:
   serializedVersion: 5
@@ -150,9 +153,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 0.68
+  m_LinearDamping: 0.66
+  m_AngularDamping: 0.44
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

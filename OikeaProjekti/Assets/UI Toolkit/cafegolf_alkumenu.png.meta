@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cafegolf_alkumenu_0: -7539271355346827069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

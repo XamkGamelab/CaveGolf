@@ -1,7 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=696e434002876c743b601c5e929fac2d&amp;type=3#MainMenuStyle" />
     <engine:VisualElement name="Container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI%20Toolkit/cafegolf_alkumenu.png?fileID=2800000&amp;guid=81b54cdb3e5f3fc48a64d3eae2c9a69e&amp;type=3#cafegolf_alkumenu&quot;); height: 1076px;">
-        <engine:Label text="Label" class="header" />
-        <engine:Button text="Button" class="button" />
+        <engine:Button text="PLAY" name="PlayButton" class="button" />
+        <engine:Button text="SETTINGS" name="SettingsButton" class="button" />
+        <engine:Button text="QUIT" name="QuitButton" class="button" />
     </engine:VisualElement>
 </engine:UXML>

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      kaktus_0: 347748570415124802
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

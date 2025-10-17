@@ -17,16 +17,22 @@ public class BallMovement : MonoBehaviour
     float StandStillTimeLimit = .5f; //time spent almost still at which point the ball is MADE stationary
 
 
+    [HideInInspector]
+    public bool Stationary {  get; private set; }
+    [HideInInspector]
+    public Vector2 Position {  get; private set; }
+
     Rigidbody2D rb;
-    void Start()
+    void Awake()
     {
+        Position = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        BInput.Instance.ReferenceBall(this);
     }
 
     void Update()
     {
-        //Debug.Log(rb.linearVelocity.magnitude +" " + rb.linearVelocityX+" " + rb.linearVelocityY);
-
+        Position = transform.position;
         //check if the ball is moving at any considerable speed
         if (rb.linearVelocity.magnitude < StandStillSpeedThreshold  ) {
             standstilltime += Time.deltaTime; // start incresing time spent still
@@ -37,11 +43,11 @@ public class BallMovement : MonoBehaviour
 
             if (standstilltime > StandStillTimeLimit)
             {
+                Stationary = true;
                 rb.linearVelocityY = 0f;
 
                 //prevent the ball from slowrolling down slight inclines
                 rb.simulated = false;
-
             }
         }
         else
@@ -54,7 +60,7 @@ public class BallMovement : MonoBehaviour
     {
         //cant launch just yet
         if (rb.linearVelocity.magnitude > 0 || standstilltime < StandStillTimeLimit) return;
-
+        Stationary = false;
         rb.simulated = true;
         Vector2 launchVector = pos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         launchVector = Vector2.ClampMagnitude(launchVector / 5, 1f);

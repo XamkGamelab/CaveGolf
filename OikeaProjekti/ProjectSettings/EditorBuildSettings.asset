@@ -12,14 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: 9edf961608c9d6d49b06f87c73db799e
   - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: dde2b972a0df59b4a934b3b6ebadb55a
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/TainaBallMoveTest.unity
     guid: 36a1b5158c3a1aa43b87dd0c1bd5ce11
-  - enabled: 1
-    path: Assets/Scenes/Episode2.unity
-    guid: dde2b972a0df59b4a934b3b6ebadb55a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

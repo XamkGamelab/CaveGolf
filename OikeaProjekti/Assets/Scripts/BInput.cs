@@ -10,12 +10,16 @@ public class BInput : MonoBehaviour
     BallMovement bMove;
     Camera cam;
 
+    public float MaxLaunchLength = 1;
+    public float LaunchRampingFactor = 5;
+
     private LineRenderer lineRenderer;
 
-    void OnEnable()
+    void Start()
     {
         tap = InputSystem.actions.FindAction("Click");
         UpdateReferences();
+
         // Add a LineRenderer component
         lineRenderer = gameObject.AddComponent<LineRenderer>();
 
@@ -45,28 +49,42 @@ public class BInput : MonoBehaviour
         bMove = GameObject.FindGameObjectWithTag("Player").GetComponent<BallMovement>();
         cam = GameObject.FindFirstObjectByType<Camera>();
     }
+
     // Update is called once per frame
     void Update()
     {
+        if(bMove == null ||cam ==null)
+        {
+            UpdateReferences();
+        }
+
         pos = Pointer.current.position.ReadValue();
         pos = cam.ScreenToWorldPoint(pos);
 
-        if (bMove != null)
+        if (!bMove.IsMoving)
         {
-            lineRenderer.SetPosition(0, bMove.position);
+            Vector2 launchVector = pos - bMove.position2d;
+            launchVector = Vector2.ClampMagnitude(launchVector / LaunchRampingFactor, MaxLaunchLength);
 
-            lineRenderer.SetPosition(1, pos);
+            lineRenderer.SetPosition(0, bMove.position2d);
+            lineRenderer.SetPosition(1, bMove.position2d + launchVector*LaunchRampingFactor);
 
+            if (tap.IsPressed())
+            {
+                bMove.Launch(launchVector);
+            }
+
+
+        }
+        else
+        {
+            lineRenderer.SetPosition(0, Vector3.one*10000000000);
+            lineRenderer.SetPosition(1, Vector3.one * 10000000000);
         }
 
 
-        if (tap.IsPressed())
-        {
-           pos = Pointer.current.position.ReadValue();
-            pos = cam.ScreenToWorldPoint(pos); 
-            bMove.Launch(pos);
-            //Debug.Log(pos);
-        }
+
+
     }
 
 

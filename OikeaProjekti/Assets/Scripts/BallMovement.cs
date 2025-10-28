@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    bool IsMoving = false;
-    
+    public bool IsMoving = false;
+    public float MaximumLaunchDistance;
+    public Vector3 position
+    {
+        get { return rb.position; }
+    }
+    public Vector2 position2d
+    {
+        get { return new Vector2(rb.position.x, rb.position.y); }
+    }
+
 
     [SerializeField, Range(0,100)]
     private float HitForceMultiplier = 1f;
@@ -52,23 +61,19 @@ public class BallMovement : MonoBehaviour
             standstilltime = 0;
         }
     }
-    public Vector3 position
-    {
-        get { return rb.position; }
-    }
+
     
     //launches the 
-    public void Launch(Vector2 pos)
+    public void Launch(Vector2 _LaunchVector)
     {
         //cant launch just yet
         if (rb.linearVelocity.magnitude > 0 || standstilltime < StandStillTimeLimit) return;
 
         rb.simulated = true;
-        Vector2 launchVector = pos - new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        launchVector = Vector2.ClampMagnitude(launchVector / 5, 1f);
 
-        Debug.Log(launchVector.magnitude);
-        rb.AddForce(launchVector * HitForceMultiplier ,ForceMode2D.Impulse);
+
+        Debug.Log(_LaunchVector.magnitude);
+        rb.AddForce(_LaunchVector * HitForceMultiplier ,ForceMode2D.Impulse);
         IsMoving = true;
     }
 }

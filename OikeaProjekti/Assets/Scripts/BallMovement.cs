@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
+    bool IsMoving = false;
+    
 
     [SerializeField, Range(0,100)]
     private float HitForceMultiplier = 1f;
@@ -41,6 +43,7 @@ public class BallMovement : MonoBehaviour
 
                 //prevent the ball from slowrolling down slight inclines
                 rb.simulated = false;
+                IsMoving = false;
 
             }
         }
@@ -49,6 +52,11 @@ public class BallMovement : MonoBehaviour
             standstilltime = 0;
         }
     }
+    public Vector3 position
+    {
+        get { return rb.position; }
+    }
+    
     //launches the 
     public void Launch(Vector2 pos)
     {
@@ -61,5 +69,6 @@ public class BallMovement : MonoBehaviour
 
         Debug.Log(launchVector.magnitude);
         rb.AddForce(launchVector * HitForceMultiplier ,ForceMode2D.Impulse);
+        IsMoving = true;
     }
 }

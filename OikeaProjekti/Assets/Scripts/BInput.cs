@@ -31,7 +31,7 @@ public class BInput : MonoBehaviour
         lineRenderer.startColor = Color.green;
 
         // Set the width
-        lineRenderer.startWidth = 0.2f;
+        lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.2f;
 
         // Set the number of vertices
@@ -65,6 +65,8 @@ public class BInput : MonoBehaviour
         {
             Vector2 launchVector = pos - bMove.position2d;
             launchVector = Vector2.ClampMagnitude(launchVector / LaunchRampingFactor, MaxLaunchLength);
+            lineRenderer.endColor = Color.Lerp(Color.green, Color.red, launchVector.magnitude / MaxLaunchLength);
+            lineRenderer.endWidth = Mathf.Lerp(.2f, .5f, launchVector.magnitude / MaxLaunchLength);
 
             lineRenderer.SetPosition(0, bMove.position2d);
             lineRenderer.SetPosition(1, bMove.position2d + launchVector*LaunchRampingFactor);

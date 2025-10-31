@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
+
+
+    Vector2 startupPosition;
+
     public bool IsMoving = false;
     public float MaximumLaunchDistance;
     public Vector3 position
@@ -31,11 +35,14 @@ public class BallMovement : MonoBehaviour
     Rigidbody2D rb;
     void Start()
     {
+
+        startupPosition = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+
         //Debug.Log(rb.linearVelocity.magnitude +" " + rb.linearVelocityX+" " + rb.linearVelocityY);
 
         //check if the ball is moving at any considerable speed
@@ -61,6 +68,14 @@ public class BallMovement : MonoBehaviour
             standstilltime = 0;
         }
     }
+
+
+    public void resetPosition()
+    {
+        gameObject.transform.position = startupPosition;
+        rb.linearVelocity = new Vector2(0, 0);
+    }
+
 
     
     //launches the 

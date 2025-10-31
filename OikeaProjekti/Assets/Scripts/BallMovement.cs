@@ -38,6 +38,7 @@ public class BallMovement : MonoBehaviour
 
         startupPosition = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
@@ -74,6 +75,7 @@ public class BallMovement : MonoBehaviour
     {
         gameObject.transform.position = startupPosition;
         rb.linearVelocity = new Vector2(0, 0);
+        rb.angularVelocity = 0;
     }
 
 

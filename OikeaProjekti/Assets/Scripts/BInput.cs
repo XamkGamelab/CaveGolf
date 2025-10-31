@@ -22,7 +22,7 @@ public class BInput : MonoBehaviour
 
         // Add a LineRenderer component
         lineRenderer = gameObject.AddComponent<LineRenderer>();
-
+        lineRenderer.sortingOrder = 1000;
         // Set the material
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
 

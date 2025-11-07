@@ -87,11 +87,11 @@ public class BallMovement : MonoBehaviour
     {
         //cant launch just yet
         if (rb.linearVelocity.magnitude > 0 || standstilltime < StandStillTimeLimit) return;
-
+        Score.Add(1);
         rb.simulated = true;
 
 
-        Debug.Log(_LaunchVector.magnitude);
+        //Debug.Log(_LaunchVector.magnitude);
         rb.AddForce(_LaunchVector * HitForceMultiplier ,ForceMode2D.Impulse);
         IsMoving = true;
     }

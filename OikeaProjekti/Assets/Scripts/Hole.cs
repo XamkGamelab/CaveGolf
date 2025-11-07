@@ -6,10 +6,14 @@ public class Hole : MonoBehaviour
 {
     private void OnTriggerEnter2D()
     {
-            if(SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings)
-            {
+        Score.UpdateTotal();
+            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings)
+        {
             Debug.LogError("INVALID SCENE");
-            }
-            else SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+
+
 }

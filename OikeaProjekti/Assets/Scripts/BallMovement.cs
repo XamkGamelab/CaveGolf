@@ -28,10 +28,29 @@ public class BallMovement : MonoBehaviour
     float StandStillTimeLimit = .5f; //time spent almost still at which point the ball is MADE stationary
 
 
+    [Header("Water Physics")]
+    [SerializeField]
+    bool WaterPhysics = false;
+    [SerializeField]
+    float WaterGravityScale = .55f;
+    [SerializeField]
+    float WaterHitForceMultiplier = 9;
+
+
+
+
     Rigidbody2D rb;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (WaterPhysics)
+        {
+            rb.gravityScale = WaterGravityScale;
+            HitForceMultiplier = WaterHitForceMultiplier;
+        }
+
+
+
     }
 
     void Update()

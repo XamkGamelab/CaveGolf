@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems; //
 public class BInput : MonoBehaviour
 {
     InputAction tap;
@@ -52,6 +53,10 @@ public class BInput : MonoBehaviour
 
             if (tap.IsPressed())
             {
+                //
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+                //
                 bMove.Launch(launchVector);
             }
         }

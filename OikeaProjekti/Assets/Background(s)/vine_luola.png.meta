@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vine_luola_0: 3576907183675154758
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

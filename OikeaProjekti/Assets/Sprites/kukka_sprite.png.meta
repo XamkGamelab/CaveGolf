@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      kukka_sprite_0: -1397839837025884607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

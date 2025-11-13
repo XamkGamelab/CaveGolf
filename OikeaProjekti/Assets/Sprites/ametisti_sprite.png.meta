@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ametisti_sprite_0: 5832481744698435931
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

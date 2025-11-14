@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
+
+
+    Vector2 startupPosition;
+
     public bool IsMoving = false;
     public float MaximumLaunchDistance;
     public Vector3 position
@@ -42,6 +46,8 @@ public class BallMovement : MonoBehaviour
     Rigidbody2D rb;
     void Start()
     {
+
+        startupPosition = gameObject.transform.position;
         rb = GetComponent<Rigidbody2D>();
         if (WaterPhysics)
         {
@@ -80,6 +86,15 @@ public class BallMovement : MonoBehaviour
             standstilltime = 0;
         }
     }
+
+
+    public void resetPosition()
+    {
+        gameObject.transform.position = startupPosition;
+        rb.linearVelocity = new Vector2(0, 0);
+        rb.angularVelocity = 0;
+    }
+
 
     
     //launches the 

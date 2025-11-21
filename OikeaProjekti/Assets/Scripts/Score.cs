@@ -23,6 +23,13 @@ public class Score : MonoBehaviour
         if (Instance != null)
             Instance.UI_UPADTE();
     }
+    public static void Reset()
+    {
+        Total = 0;
+        Local = 0;
+        Instance?.UI_UPADTE();
+    }
+
     public static void Save()
     {
         Debug.LogError("ERROR: SCORE SAVING IS NOT IMPLEMENTED YET");
@@ -42,13 +49,15 @@ public class Score : MonoBehaviour
     TextMeshProUGUI text;
     void UI_UPADTE()
     {
+        //text.text = $"TOTAL: {Total.ToString()} \n {(Local != 0 ? ("Level:" + Local.ToString()) : "")}";
         text.text = " " + Total.ToString() + (Local != 0 ? ("<br>+" + Local.ToString()) : "");
     }
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
         UI_UPADTE();
-        if (Instance != null) Debug.LogWarning("Replacing existing Score instance with new one, there may be multiple in scene?");
+        //if (Instance != null) Debug.LogWarning("Replacing existing Score instance with new one, there may be multiple in scene?");
         Instance = this;
+        //DontDestroyOnLoad(this.gameObject);
     }
 }

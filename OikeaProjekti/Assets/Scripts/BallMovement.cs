@@ -94,9 +94,6 @@ public class BallMovement : MonoBehaviour
         rb.angularVelocity = 0;
     }
 
-
-    
-    //launches the 
     public void Launch(Vector2 _LaunchVector)
     {
         //cant launch just yet

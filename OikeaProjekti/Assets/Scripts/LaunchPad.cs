@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class JumpPad : MonoBehaviour
+public class LaunchPad : MonoBehaviour
 {
     private float bounce = 10f;
 

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class BallMovement : MonoBehaviour
 {
@@ -95,16 +94,6 @@ public class BallMovement : MonoBehaviour
         rb.angularVelocity = 0;
     }
 
-
-    AudioManager audioManager;
-
-    private void Awake()
-    {
-        audioManager = GameObject.FindWithTag("Audio").GetComponent<AudioManager>();
-    }
-
-
-    //launches the 
     public void Launch(Vector2 _LaunchVector)
     {
         //cant launch just yet
@@ -112,7 +101,6 @@ public class BallMovement : MonoBehaviour
         Score.Add(1);
         rb.simulated = true;
 
-        audioManager.PlaySFX(audioManager.throwBall);
 
         //Debug.Log(_LaunchVector.magnitude);
         rb.AddForce(_LaunchVector * HitForceMultiplier ,ForceMode2D.Impulse);

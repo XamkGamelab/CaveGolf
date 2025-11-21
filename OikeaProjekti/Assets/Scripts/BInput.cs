@@ -15,6 +15,17 @@ public class BInput : MonoBehaviour
     public float LaunchRampingFactor = 5;
 
     private Arrow arrow;
+    bool isPaused = false;
+
+    public void Pause()
+    {
+        isPaused = true;
+        arrow.Hide();
+    }
+    public void Resume()
+    {
+        isPaused = false;
+    }
 
     void Start()
     {
@@ -43,7 +54,7 @@ public class BInput : MonoBehaviour
         pos = Pointer.current.position.ReadValue();
         pos = cam.ScreenToWorldPoint(pos);
 
-        if (!bMove.IsMoving)
+        if (!bMove.IsMoving && !isPaused)
         {
             Vector2 launchVector = pos - bMove.position2d;
             launchVector = Vector2.ClampMagnitude(launchVector / LaunchRampingFactor, MaxLaunchLength);

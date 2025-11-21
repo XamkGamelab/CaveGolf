@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class resetBall : MonoBehaviour
 {
@@ -19,8 +20,8 @@ public class resetBall : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<BallMovement>().resetPosition();
-       
+            Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+
 
 
 

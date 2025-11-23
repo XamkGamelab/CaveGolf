@@ -48,9 +48,23 @@ public class Score : MonoBehaviour
     [HideInInspector]
     TextMeshProUGUI text;
     void UI_UPADTE()
-    {
+    {   string totalString = Total.ToString();
+        string localString = "+" + Local.ToString("#0");
+
+        while (totalString.Length != localString.Length)
+        {
+            if(totalString.Length > localString.Length)
+            {
+                localString = " " + localString;
+            }
+            else
+            {
+            totalString = " " + totalString;
+            }
+        }
+
         //text.text = $"TOTAL: {Total.ToString()} \n {(Local != 0 ? ("Level:" + Local.ToString()) : "")}";
-        text.text = " " + Total.ToString() + (Local != 0 ? ("<br>+" + Local.ToString()) : "");
+        text.text =  totalString + (Local != 0 ? ("<br>" + localString) : "");
     }
     void Start()
     {

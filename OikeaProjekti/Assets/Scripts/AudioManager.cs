@@ -10,9 +10,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip throwBall;
 
 
+    float sfxCooldown = 1f;      
+    float lastSFXTime = -999f;   
+
     public void PlaySFX(AudioClip clip)
     {
-        SFXSource.PlayOneShot(clip);
+        if (Time.time - lastSFXTime >= sfxCooldown)
+        {
+            SFXSource.PlayOneShot(clip);
+            lastSFXTime = Time.time;
+        }
     }
 
 }

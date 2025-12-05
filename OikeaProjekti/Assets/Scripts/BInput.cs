@@ -17,7 +17,6 @@ public class BInput : MonoBehaviour
     private Arrow arrow;
     bool isPaused = false;
 
-    AudioManager audioManager;
 
 
     public void Pause()
@@ -35,15 +34,7 @@ public class BInput : MonoBehaviour
         tap = InputSystem.actions.FindAction("Click");
         UpdateReferences();
         arrow = new Arrow();
-        GameObject tempAudioManagerObject = GameObject.FindWithTag("Audio");
-        if (tempAudioManagerObject != null)
-        {
-            audioManager = tempAudioManagerObject.GetComponent<AudioManager>();
-        }
-        else
-        {
-            Debug.LogError("AUDIO MANAGER NOT FOUND");
-        }
+
 
 
 
@@ -84,7 +75,6 @@ public class BInput : MonoBehaviour
                 //
                 bMove.Launch(launchVector);
 
-                audioManager?.PlaySFX(audioManager.throwBall);
             }
         }
         else

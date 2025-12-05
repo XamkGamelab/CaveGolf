@@ -39,6 +39,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField]
     float WaterHitForceMultiplier = 9;
 
+    AudioManager audioManager;
 
 
 
@@ -54,7 +55,15 @@ public class BallMovement : MonoBehaviour
             HitForceMultiplier = WaterHitForceMultiplier;
         }
 
-
+        GameObject tempAudioManagerObject = GameObject.FindWithTag("Audio");
+        if (tempAudioManagerObject != null)
+        {
+            audioManager = tempAudioManagerObject.GetComponent<AudioManager>();
+        }
+        else
+        {
+            Debug.LogError("AUDIO MANAGER NOT FOUND");
+        }
 
     }
 
@@ -77,11 +86,15 @@ public class BallMovement : MonoBehaviour
                 //prevent the ball from slowrolling down slight inclines
                 rb.simulated = false;
                 IsMoving = false;
-
+            }
+            else
+            {
+                IsMoving = true;
             }
         }
         else
         {
+            IsMoving = true;
             standstilltime = 0;
         }
     }
@@ -99,6 +112,8 @@ public class BallMovement : MonoBehaviour
         //cant launch just yet
         if (rb.linearVelocity.magnitude > 0 || standstilltime < StandStillTimeLimit) return;
         Score.Add(1);
+        audioManager?.PlaySFX(audioManager.throwBall);
+
         rb.simulated = true;
 
 

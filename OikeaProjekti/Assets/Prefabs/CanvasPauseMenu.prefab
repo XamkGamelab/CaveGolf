@@ -1630,6 +1630,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7287443785058372038, guid: 6a07887df18135f46b2aa545394e2bbd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287443785058372038, guid: 6a07887df18135f46b2aa545394e2bbd, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287443785058372038, guid: 6a07887df18135f46b2aa545394e2bbd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287443785058372038, guid: 6a07887df18135f46b2aa545394e2bbd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 157
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287443785058372038, guid: 6a07887df18135f46b2aa545394e2bbd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -29.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7834483493307472653, guid: 6a07887df18135f46b2aa545394e2bbd, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4055636

@@ -1725,26 +1725,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4942918133993001975, guid: 6ba4051a1543b3d45b6a5bc3156aafcc, type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4942918133993001975, guid: 6ba4051a1543b3d45b6a5bc3156aafcc, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4942918133993001975, guid: 6ba4051a1543b3d45b6a5bc3156aafcc, type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4942918133993001975, guid: 6ba4051a1543b3d45b6a5bc3156aafcc, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: f9e237acd39d5a64db8c0352938ae187, type: 2}
-    - target: {fileID: 4942918133993001975, guid: 6ba4051a1543b3d45b6a5bc3156aafcc, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 6345986149351074408, guid: 6ba4051a1543b3d45b6a5bc3156aafcc, type: 3}
       propertyPath: m_Name
       value: Tutorial

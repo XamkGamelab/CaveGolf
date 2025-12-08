@@ -64,7 +64,7 @@ public class Score : MonoBehaviour
         }
 
         //text.text = $"TOTAL: {Total.ToString()} \n {(Local != 0 ? ("Level:" + Local.ToString()) : "")}";
-        text.text =  totalString + (Local != 0 ? ("<br>" + localString) : "");
+        text.text =  totalString + "<br>" + localString;
     }
     void Start()
     {

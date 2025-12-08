@@ -1,9 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class Hole : MonoBehaviour
 {
+    [SerializeField]
+    TextMeshPro flagText;
     private void OnTriggerEnter2D()
     {
         Score.UpdateTotal();
@@ -15,6 +16,10 @@ public class Hole : MonoBehaviour
         else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    private void Awake()
+    {
+        if (flagText == null) Debug.LogError("Flag text invalid");
 
-
+        flagText.text = SceneManager.GetActiveScene().buildIndex.ToString();
+    }
 }

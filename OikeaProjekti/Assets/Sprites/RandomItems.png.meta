@@ -559,7 +559,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RandomItems_0: 703968298814857132
+      RandomItems_1: -8306268722386277420
+      RandomItems_10: -4958855311488149991
+      RandomItems_11: -7398803874994753039
+      RandomItems_12: 4677191805530538501
+      RandomItems_13: -6806385924400425741
+      RandomItems_14: -3352550474272254502
+      RandomItems_15: -2158048649900838020
+      RandomItems_16: 2610394935517908312
+      RandomItems_17: -4931847698237873561
+      RandomItems_2: -6598754458553017183
+      RandomItems_3: 1079805735920909657
+      RandomItems_4: 5611566404518869001
+      RandomItems_5: -2846549637793587533
+      RandomItems_6: 2976137272305639855
+      RandomItems_7: 7845636019306582139
+      RandomItems_8: 8283994386210091978
+      RandomItems_9: -3545096828053142315
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

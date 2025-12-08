@@ -8,4 +8,8 @@ public class MainMenu : MonoBehaviour
         Score.Reset();
         SceneManager.LoadSceneAsync("Level1");
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

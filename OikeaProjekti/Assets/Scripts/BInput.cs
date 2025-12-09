@@ -17,7 +17,8 @@ public class BInput : MonoBehaviour
     private Arrow arrow;
     bool isPaused = false;
 
-
+    public Color startColor;
+    public Color endColor;
 
     public void Pause()
     {
@@ -33,8 +34,9 @@ public class BInput : MonoBehaviour
     {
         tap = InputSystem.actions.FindAction("Click");
         UpdateReferences();
+        Arrow.startColor = startColor;
+        Arrow.endColor = endColor;
         arrow = new Arrow();
-
 
 
 

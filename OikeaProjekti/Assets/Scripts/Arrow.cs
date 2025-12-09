@@ -16,8 +16,8 @@ public class Arrow
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
 
         // Set the color
-        lineRenderer.endColor = Color.red;
-        lineRenderer.startColor = Color.green;
+        lineRenderer.endColor = endColor;
+        lineRenderer.startColor = startColor;
 
         // Set the width
         lineRenderer.startWidth = 0.1f;
@@ -34,6 +34,7 @@ public class Arrow
     public void Show(Vector2 launchVector, Vector2 position2d, float MaxLaunchLength,float LaunchRampingFactor )
     {
         lineRenderer.endColor = Color.Lerp(startColor, endColor, launchVector.magnitude / MaxLaunchLength);
+
         lineRenderer.endWidth = Mathf.Lerp(.2f, .5f, launchVector.magnitude / MaxLaunchLength);
 
 
@@ -47,3 +48,4 @@ public class Arrow
         lineRenderer.SetPosition(1, Vector3.one * 10000000000);
     }
 }
+    

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class CharacterCustomization : MonoBehaviour
 {
-    //[SerializeField] private Renderer rend;
     public Renderer ballRenderer;
+    public ColorButton[] colorButtons;
 
     private Dictionary<string, string> colors =
         new Dictionary<string, string>() {
@@ -48,12 +48,9 @@ public class CharacterCustomization : MonoBehaviour
         {
             Debug.LogWarning("Väriä ei löytynyt: " + colorName);
         }
-    }
-    /*private void Start()
-    {
-        if (PlayerPrefs.HasKey("SelectedColor"))
+        foreach (var btn in colorButtons)
         {
-            SelectColor(PlayerPrefs.GetString("SelectedColor"));
+            btn.UpdateState(colorName);
         }
-    }*/
+    }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6771597994554752024}
   - component: {fileID: 5259478243001733877}
   - component: {fileID: 795008199807900923}
+  - component: {fileID: 3994356739102425544}
   m_Layer: 5
   m_Name: ButtonBlue
   m_TagString: Untagged
@@ -95,7 +96,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 1146350203143413197, guid: c3148a147e13bdb4cb9c303c50177f42, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -132,6 +133,22 @@ MonoBehaviour:
           m_StringArgument: Blue
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3994356739102425544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548499386003161738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ccfb9ba94a89e14c8f2f95f88117eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 5259478243001733877}
+  colorName: Blue
+  normalSprite: {fileID: -8447034200961263454, guid: c7163e87c7e3a314fb0915c9b3670a24, type: 3}
+  selectedSprite: {fileID: 1146350203143413197, guid: c3148a147e13bdb4cb9c303c50177f42, type: 3}
 --- !u!1 &1271262045021089412
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +369,7 @@ GameObject:
   - component: {fileID: 7168329315170069619}
   - component: {fileID: 5967367144539328094}
   - component: {fileID: 1582620821701588793}
+  - component: {fileID: 239783566080055536}
   m_Layer: 5
   m_Name: ButtonGreen
   m_TagString: Untagged
@@ -435,7 +453,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -447,7 +465,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: -3485284156173224182, guid: f89a5225826bdb5418501d1f833eda55, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -472,6 +490,22 @@ MonoBehaviour:
           m_StringArgument: Green
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &239783566080055536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397913981828637149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ccfb9ba94a89e14c8f2f95f88117eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 5967367144539328094}
+  colorName: Green
+  normalSprite: {fileID: 2093356802199752986, guid: 77a3eda218642224cb91db04a6be555f, type: 3}
+  selectedSprite: {fileID: -3485284156173224182, guid: f89a5225826bdb5418501d1f833eda55, type: 3}
 --- !u!1 &1529839090357871030
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +826,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRenderer: {fileID: 0}
+  colorButtons:
+  - {fileID: 239783566080055536}
+  - {fileID: 3994356739102425544}
+  - {fileID: 5284014790788329051}
 --- !u!1 &3285092507471545521
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +928,7 @@ GameObject:
   - component: {fileID: 8894617632548543079}
   - component: {fileID: 2558053278760156496}
   - component: {fileID: 2175830757307601736}
+  - component: {fileID: 5284014790788329051}
   m_Layer: 5
   m_Name: ButtonPink
   m_TagString: Untagged
@@ -973,7 +1012,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -985,7 +1024,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 6661120737402646261, guid: 9a4c4fd30cae2bb4db3e664903b8494c, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -1010,6 +1049,22 @@ MonoBehaviour:
           m_StringArgument: Pink
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5284014790788329051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5152666532250581719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ccfb9ba94a89e14c8f2f95f88117eb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 2558053278760156496}
+  colorName: Pink
+  normalSprite: {fileID: 8010969560129485468, guid: a1283c722e8303341bacaf5e95f76c7c, type: 3}
+  selectedSprite: {fileID: 6661120737402646261, guid: 9a4c4fd30cae2bb4db3e664903b8494c, type: 3}
 --- !u!1 &5510269351451469972
 GameObject:
   m_ObjectHideFlags: 0

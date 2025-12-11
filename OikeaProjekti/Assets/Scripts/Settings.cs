@@ -9,14 +9,19 @@ public class Settings : MonoBehaviour
 
     public void SettingsOpen()
     {
-        pauseMenu.pauseMenu.SetActive(false);
+        if (pauseMenu != null)
+            pauseMenu.pauseMenu.SetActive(false);
+
         settings.SetActive(true);
-       
+        Debug.Log("SettingsOpen called");
     }
+
     public void SettingsClose()
     {
         settings.SetActive(false);
-        pauseMenu.pauseMenu.SetActive(true);
+
+        if (pauseMenu != null)
+            pauseMenu.pauseMenu.SetActive(true);
     }
     /*public void ToggleOn()
     {

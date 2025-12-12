@@ -6,7 +6,7 @@ public class Score : MonoBehaviour
 
     public static int Local { get; private set; }
     public static int Total { get; private set; }
-
+    public static int HighScore = 0;
 
 
     public static void Add(int i)
@@ -30,9 +30,13 @@ public class Score : MonoBehaviour
         Instance?.UI_UPADTE();
     }
 
-    public static void Save()
+    public static void SaveHighScore()
     {
-        Debug.LogError("ERROR: SCORE SAVING IS NOT IMPLEMENTED YET");
+        if(Total < HighScore)
+        {
+            HighScore = Total;
+        }
+
     }
     public static void Load()
     {

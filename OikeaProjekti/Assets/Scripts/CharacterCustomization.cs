@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 public class CharacterCustomization : MonoBehaviour
 {
     public Renderer ballRenderer;
+    UnityEngine.UI.Image MainMenuImage;
+    bool MainMenu = false;
     public ColorButton[] colorButtons;
 
     private Dictionary<string, string> colors =
@@ -21,6 +24,10 @@ public class CharacterCustomization : MonoBehaviour
         {
             GameObject ball = GameObject.FindGameObjectWithTag("Player");
             ballRenderer = ball.GetComponent<Renderer>();
+            if(ballRenderer == null)
+            {
+                MainMenuImage = ball.GetComponent<UnityEngine.UI.Image>();
+            }
         }
 
         if (PlayerPrefs.HasKey("SelectedColor"))
@@ -39,7 +46,14 @@ public class CharacterCustomization : MonoBehaviour
             string hex = colors[colorName];
             ColorUtility.TryParseHtmlString(hex, out currentColor);
 
-            ballRenderer.material.color = currentColor;
+            if(ballRenderer != null)
+            {
+                ballRenderer.material.color = currentColor;
+            }
+            else
+            {
+                MainMenuImage.color = currentColor;
+            }
             PlayerPrefs.SetString("SelectedColor", colorName);
 
             Debug.Log("Väri vaihdettu: " + colorName);

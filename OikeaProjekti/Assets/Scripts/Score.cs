@@ -6,8 +6,9 @@ public class Score : MonoBehaviour
 
     public static int Local { get; private set; }
     public static int Total { get; private set; }
-    public static int HighScore = 0;
 
+    public static int HighScore = 0;
+    public static bool GameCompleted = false;
 
     public static void Add(int i)
     {
@@ -28,6 +29,7 @@ public class Score : MonoBehaviour
         Total = 0;
         Local = 0;
         Instance?.UI_UPADTE();
+        GameCompleted = false;
     }
 
     public static void SaveHighScore()

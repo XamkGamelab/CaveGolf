@@ -11,7 +11,9 @@ public class Hole : MonoBehaviour
             if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1)
         {
             SceneManager.LoadScene(0);
-            Debug.LogError("INVALID SCENE");
+            Debug.LogError("MainMenu!");
+            Score.GameCompleted = true;
+
         }
         else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

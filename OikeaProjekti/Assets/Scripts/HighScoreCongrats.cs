@@ -15,6 +15,11 @@ public class HighScoreCongrats : MonoBehaviour
 
     void Start()
     {
+        if (!Score.GameCompleted)
+        {
+            canvas.SetActive(false);
+
+        }
         if (Score.HighScore != 0 || Score.Total != 0)
         {
             canvas.SetActive(true);
@@ -23,7 +28,7 @@ public class HighScoreCongrats : MonoBehaviour
         {
             canvas.SetActive(false);
         }
-        text.text = $"YOUR SCORE WAS:\r\n{Score.Total}\r\n\r\n Prev HighScore:\r\n{Score.HighScore}";
+        text.text = $"YOUR SCORE WAS:\r\n{Score.Total}\r\n\r\n Prev Best:\r\n{Score.HighScore}";
         Score.SaveHighScore();
         Score.Reset();
     }

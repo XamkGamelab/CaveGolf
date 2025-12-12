@@ -1458,6 +1458,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
+      propertyPath: m_GravityScale
+      value: 1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: StandStillSpeedThreshold
       value: 0.46
@@ -5795,6 +5799,10 @@ PrefabInstance:
     - target: {fileID: 5895812287851204652, guid: 3bf89a9aa39c04d4c826a896090270fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847389678618609685, guid: 3bf89a9aa39c04d4c826a896090270fd, type: 3}
+      propertyPath: MaxLaunchLength
+      value: 1.28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

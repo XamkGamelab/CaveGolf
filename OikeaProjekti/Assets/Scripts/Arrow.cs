@@ -7,6 +7,7 @@ public class Arrow
 
     public static Color startColor = Color.green;
     public static Color endColor = Color.red;
+
     public Arrow()
     {
         obj = new GameObject();
@@ -35,7 +36,7 @@ public class Arrow
     {
         lineRenderer.endColor = Color.Lerp(startColor, endColor, launchVector.magnitude / MaxLaunchLength);
 
-        lineRenderer.endWidth = Mathf.Lerp(.2f, .5f, launchVector.magnitude / MaxLaunchLength);
+        lineRenderer.endWidth = Mathf.Lerp(.2f, .5f, launchVector.magnitude * MaxLaunchLength);
 
 
         lineRenderer.SetPosition(0, position2d);

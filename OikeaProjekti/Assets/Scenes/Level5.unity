@@ -466,6 +466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: kaktus
       objectReference: {fileID: 0}
+    - target: {fileID: 986059816129859997, guid: a4764080622dca64483902836ef248d2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2610504284666948258, guid: a4764080622dca64483902836ef248d2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -614,6 +618,10 @@ PrefabInstance:
     - target: {fileID: 710181172014503065, guid: a4764080622dca64483902836ef248d2, type: 3}
       propertyPath: m_Name
       value: kaktus (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 986059816129859997, guid: a4764080622dca64483902836ef248d2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 155
       objectReference: {fileID: 0}
     - target: {fileID: 2610504284666948258, guid: a4764080622dca64483902836ef248d2, type: 3}
       propertyPath: m_LocalScale.x
@@ -764,6 +772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: kaktus (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 986059816129859997, guid: a4764080622dca64483902836ef248d2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 74
+      objectReference: {fileID: 0}
     - target: {fileID: 2610504284666948258, guid: a4764080622dca64483902836ef248d2, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -782,7 +794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2610504284666948258, guid: a4764080622dca64483902836ef248d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 2610504284666948258, guid: a4764080622dca64483902836ef248d2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -960,22 +972,6 @@ PrefabInstance:
     - target: {fileID: 200686827737363734, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: StandStillSpeedThreshold

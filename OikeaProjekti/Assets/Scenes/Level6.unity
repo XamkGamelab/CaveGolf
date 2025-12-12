@@ -1032,6 +1032,18 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
+      propertyPath: m_Mass
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
+      propertyPath: m_GravityScale
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
+      propertyPath: HitForceMultiplier
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: StandStillSpeedThreshold
       value: 0.46
@@ -1445,6 +1457,10 @@ PrefabInstance:
     - target: {fileID: 5895812287851204652, guid: 3bf89a9aa39c04d4c826a896090270fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847389678618609685, guid: 3bf89a9aa39c04d4c826a896090270fd, type: 3}
+      propertyPath: MaxLaunchLength
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7617,6 +7633,7 @@ SceneRoots:
   - {fileID: 637999882}
   - {fileID: 985132019}
   - {fileID: 383394193}
+  - {fileID: 509633872}
   - {fileID: 233115595}
   - {fileID: 1709475568}
   - {fileID: 1584987349}
@@ -7672,7 +7689,6 @@ SceneRoots:
   - {fileID: 625796574}
   - {fileID: 968973612}
   - {fileID: 504580329}
-  - {fileID: 509633872}
   - {fileID: 1160518249}
   - {fileID: 1199013637}
   - {fileID: 661534795}

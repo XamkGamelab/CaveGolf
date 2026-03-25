@@ -2133,6 +2133,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841251084}
   m_CullTransparentMesh: 1
+--- !u!114 &885679026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8294567501817282218, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+  m_PrefabInstance: {fileID: 1055221054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1055221054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2141,6 +2152,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: ButtonOpenUserSignupWindow
+      value: 
+      objectReference: {fileID: 885679026}
     - target: {fileID: 8294567501151201812, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
       propertyPath: m_Pivot.x
       value: 0

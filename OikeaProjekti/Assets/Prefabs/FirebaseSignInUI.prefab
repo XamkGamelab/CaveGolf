@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 8294567500827839277}
   - component: {fileID: 8294567500827839279}
   - component: {fileID: 8294567500827839276}
+  - component: {fileID: 1538893257907477252}
   m_Layer: 5
   m_Name: LeaderboardEntry
   m_TagString: Untagged
@@ -632,9 +633,9 @@ RectTransform:
   - {fileID: 8294567501385498066}
   m_Father: {fileID: 8294567501599163668}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -40}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 580, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8294567500827839279
@@ -675,6 +676,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1538893257907477252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294567500827839250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c857cf7c100267b47a88a072cae0783e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8294567500859659810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,7 +1246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8294567501113086936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1458,11 +1471,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761ba0f2fb0e23b479a457d0413be19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewUsername: {fileID: 8294567502719734901}
-  NewPassword: {fileID: 8294567501104205554}
-  ButtonNewUser: {fileID: 8294567501817282218}
-  DonePanel: {fileID: 8294567502279317828}
-  ErrorPanel: {fileID: 8294567501855951301}
+  ButtonCreateWindow: {fileID: 8294567501817282218}
+  LeaderboardEntries: []
+  SignInSignUpPanel: {fileID: 8294567501113086936}
+  UserCreationPanel: {fileID: 8294567501090155509}
+  UserCreationSucceessPanel: {fileID: 8294567502279317828}
+  UserCreationFailPanel: {fileID: 8294567501855951301}
+  NewUsername: {fileID: 8294567501377626296}
+  NewPassword: {fileID: 8294567500772291291}
+  ButtonNewUser: {fileID: 8294567502326510061}
 --- !u!1 &8294567501268151114
 GameObject:
   m_ObjectHideFlags: 0

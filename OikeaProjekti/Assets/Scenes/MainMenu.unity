@@ -2144,6 +2144,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841251084}
   m_CullTransparentMesh: 1
+--- !u!224 &1001628951 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8294567502279317828, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+  m_PrefabInstance: {fileID: 1055221054}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1055221054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2157,6 +2162,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1254958272}
     - target: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: SignInSignUpPanel
+      value: 
+      objectReference: {fileID: 1200635713}
+    - target: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: UserCreationPanel
+      value: 
+      objectReference: {fileID: 2043073842}
+    - target: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
       propertyPath: ButtonCreateWindow
       value: 
       objectReference: {fileID: 258447454}
@@ -2168,6 +2181,14 @@ PrefabInstance:
       propertyPath: ButtonCreateNewUser
       value: 
       objectReference: {fileID: 258447454}
+    - target: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: UserCreationFailPanel
+      value: 
+      objectReference: {fileID: 1177084009}
+    - target: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: UserCreationSucceessPanel
+      value: 
+      objectReference: {fileID: 1001628951}
     - target: {fileID: 8294567500678853241, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2306,7 +2327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8294567502636873917, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2316,6 +2337,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1478750591}
   m_SourcePrefab: {fileID: 100100000, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+--- !u!224 &1177084009 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8294567501855951301, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+  m_PrefabInstance: {fileID: 1055221054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1200635713 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8294567501113086936, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+  m_PrefabInstance: {fileID: 1055221054}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1254958272 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8294567502326510061, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}

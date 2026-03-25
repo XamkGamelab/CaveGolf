@@ -3,10 +3,11 @@ using Firebase.Extensions;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-
+using UniRx;
 public class Database : Singleton<Database>
 {
-    public bool SignedIn;
+    //public bool SignedIn;
+    public ReactiveProperty<bool> SignedIn { get; private set; } = new();
 
     Firebase.FirebaseApp app;
 
@@ -14,6 +15,7 @@ public class Database : Singleton<Database>
     {
         Debug.Log("INIT DATABASE");
         CheckDependencyStatus();
+        SignedIn.Value = false;
     }
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
@@ -38,10 +40,14 @@ public class Database : Singleton<Database>
             errorCallback(e);
             return;
         }
+        SignedIn.Value = true;
         Debug.Log("Task Done");
     }
 
-
+    public void DebugSetSignedIn()
+    {
+        SignedIn.Value = true;
+    }
     void CheckDependencyStatus()
     {
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {

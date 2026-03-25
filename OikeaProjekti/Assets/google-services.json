@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "317246258100",
+    "firebase_url": "https://pelidatafinalassignement-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pelidatafinalassignement",
+    "storage_bucket": "pelidatafinalassignement.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317246258100:android:62bfdb28247c54b33c90e1",
+        "android_client_info": {
+          "package_name": "com.taina.CaveGolf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUKku-k5q8BQF4aj8-sf6GefxyiYh-7XU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

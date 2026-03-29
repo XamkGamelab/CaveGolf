@@ -1630,16 +1630,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761ba0f2fb0e23b479a457d0413be19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonCreateWindow: {fileID: 8294567501817282218}
   SignInSignUpPanel: {fileID: 8294567501113086936}
+  LoginUsername: {fileID: 8294567502719734901}
+  LoginPassword: {fileID: 8294567501104205554}
   SignInButton: {fileID: 8294567500703626841}
+  ButtonOpenUserSignupWindow: {fileID: 8294567501817282218}
   UserCreationPanel: {fileID: 8294567501090155509}
   UserCreationSucceessPanel: {fileID: 8294567502279317828}
   UserCreationFailPanel: {fileID: 8294567501855951301}
-  UserCreationEmailErrorText: {fileID: 2243791119793897625}
-  UserCreationPasswordErrorText: {fileID: 1566495648727689690}
   NewUsername: {fileID: 8294567501377626296}
+  UserCreationEmailErrorText: {fileID: 2243791119793897625}
   NewPassword: {fileID: 8294567500772291291}
+  UserCreationPasswordErrorText: {fileID: 1566495648727689690}
   ButtonNewUser: {fileID: 8294567502326510061}
 --- !u!1 &8294567501268151114
 GameObject:

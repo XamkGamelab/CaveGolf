@@ -9,6 +9,8 @@ public class FirebassController : MonoBehaviour
     //all relevant UI items
     [Header("base sign in menu")]
     public RectTransform SignInSignUpPanel;
+    public InputField LoginUsername;
+    public InputField LoginPassword;
     public Button SignInButton;
     public Button ButtonOpenUserSignupWindow;
     [Header("User creation menu")]
@@ -43,12 +45,11 @@ public class FirebassController : MonoBehaviour
         NewUsername.OnValueChangedAsObservable().Subscribe(username => VerifyEmail(username));
         NewPassword.OnValueChangedAsObservable().Subscribe(password => VerifyPassword(password));
 
-
     }
     //Helper function to organize adding listeneres to all buttons
     public void InitButtons()
     {
-        SignInButton.onClick.AddListener(() => Database.Instance.DebugSetSignedIn());
+        // SignInButton.onClick.AddListener(() => Database.Instance.DebugSetSignedIn());
         ButtonOpenUserSignupWindow.onClick.AddListener(() => UserCreationPanel.gameObject.SetActive(true));
         ButtonNewUser.onClick.AddListener(() => {
             //only try logging in if username and password are valid-ish (firebase does its own validation)
@@ -61,6 +62,7 @@ public class FirebassController : MonoBehaviour
                 Debug.LogWarning("Invalid Username or password?");
             }
         });
+        SignInButton.onClick.AddListener(() => Database.Instance.SignIn(LoginUsername.text,LoginPassword.text,LoginErrorCallback));
     }
 
     void VerifyEmail(string username)
@@ -98,7 +100,11 @@ public class FirebassController : MonoBehaviour
         Debug.Log("Signed in? = " + isSignedIn);
         SignInSignUpPanel.gameObject.SetActive(!isSignedIn);
     }
+    public void LoginErrorCallback(System.Exception e)
+    {
+        UserCreationFailPanel.gameObject.SetActive(true);
 
+    }
     public void AccountCreationErrorCallback(System.Exception e)
     {
         UserCreationFailPanel.gameObject.SetActive(true);

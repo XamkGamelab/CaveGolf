@@ -8,7 +8,6 @@ public class Database : Singleton<Database>
 {
     //public bool SignedIn;
     public ReactiveProperty<bool> SignedIn { get; private set; } = new();
-
     Firebase.FirebaseApp app;
 
     public Database()
@@ -20,7 +19,8 @@ public class Database : Singleton<Database>
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to create an account with email ${email} and password ${password}");
-        if(app is null){
+        if (app is null)
+        {
             System.Exception e = new System.NullReferenceException("Signup failed because firebase app was null");
             Debug.LogException(e);
             errorCallback(e);
@@ -43,6 +43,30 @@ public class Database : Singleton<Database>
         SignedIn.Value = true;
         Debug.Log("Task Done");
     }
+    async public void SignIn(string email, string password, Utils.ErrorCallback errorCallback)
+    {
+        Debug.Log($"Attempting to sign in with email ${email} and password ${password}");
+        if (app is null)
+        {
+            System.Exception e = new System.NullReferenceException("Signup failed because firebase app was null");
+            Debug.LogException(e);
+            errorCallback(e);
+            return;
+        }
+        Task signIn = FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync(email, password);
+        try
+        {
+            await signIn;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("ERROR: " + e.Message);
+            errorCallback(e);
+            return;
+        }
+        SignedIn.Value = true;
+        Debug.Log("Signed in");
+    }
 
     public void DebugSetSignedIn()
     {
@@ -50,7 +74,8 @@ public class Database : Singleton<Database>
     }
     void CheckDependencyStatus()
     {
-        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 
-public class FirebassController : SingletonMono<FirebassController>
+public class UIUserManager : MonoBehaviour
 {
     //all relevant UI items
     [Header("base sign in menu")]
@@ -32,7 +32,7 @@ public class FirebassController : SingletonMono<FirebassController>
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
         InitButtons();
         //Only show the login  menu on awake if player is not already logged in.
         if (!Database.Instance.SignedIn.Value) {SignInSignUpPanel.gameObject.SetActive(true);}

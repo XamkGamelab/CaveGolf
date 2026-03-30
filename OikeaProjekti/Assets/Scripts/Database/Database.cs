@@ -8,6 +8,8 @@ public class Database : Singleton<Database>
 {
     //public bool SignedIn;
     public ReactiveProperty<bool> SignedIn { get; private set; } = new();
+    public ReactiveProperty<FirebaseUser> User { get; private set; } = new();
+
     Firebase.FirebaseApp app;
 
     public Database()
@@ -15,6 +17,7 @@ public class Database : Singleton<Database>
         Debug.Log("INIT DATABASE");
         CheckDependencyStatus();
         SignedIn.Value = false;
+        User.Value = null;
     }
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
@@ -40,6 +43,7 @@ public class Database : Singleton<Database>
             errorCallback(e);
             return;
         }
+        if(Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser is not null) User.Value = FirebaseAuth.DefaultInstance.CurrentUser;
         SignedIn.Value = true;
         Debug.Log("Task Done");
     }
@@ -65,7 +69,14 @@ public class Database : Singleton<Database>
             return;
         }
         SignedIn.Value = true;
+        User.Value = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
         Debug.Log("Signed in");
+    }
+    async public void SignOut()
+    {
+        FirebaseAuth.DefaultInstance.SignOut();
+        SignedIn.Value = false;
+        User = null;
     }
 
     public void DebugSetSignedIn()

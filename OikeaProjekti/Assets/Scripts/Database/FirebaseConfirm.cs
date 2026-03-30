@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 
-public class FirebassController : MonoBehaviour
+public class FirebassController : SingletonMono<FirebassController>
 {
     //all relevant UI items
     [Header("base sign in menu")]
@@ -13,6 +13,7 @@ public class FirebassController : MonoBehaviour
     public InputField LoginPassword;
     public Button SignInButton;
     public Button ButtonOpenUserSignupWindow;
+
     [Header("User creation menu")]
     public RectTransform UserCreationPanel;
     public RectTransform UserCreationSucceessPanel;
@@ -23,10 +24,15 @@ public class FirebassController : MonoBehaviour
     public Text UserCreationPasswordErrorText;
     public Button ButtonNewUser;
 
+    [Header("User panel")]
+    public RectTransform UserPanel;
+    public Text   TextUserPanelUsername;
+    public Button ButtonUserPanelLogout;
 
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         InitButtons();
         //Only show the login  menu on awake if player is not already logged in.
         if (!Database.Instance.SignedIn.Value) {SignInSignUpPanel.gameObject.SetActive(true);}
@@ -39,7 +45,8 @@ public class FirebassController : MonoBehaviour
          * 
          * I subscribe to it here to display/hide a login prompt based on its state
          *********************************************************/
-        Database.Instance.SignedIn.Subscribe(b => ShowSignInUI(b));
+        Database.Instance.SignedIn.Subscribe(b => OnLogInStatusChanged(b));
+        Database.Instance.User.Subscribe(u => OnUserNameChanged(u?.Email));
 
         //Check user input as the user types using  reactive observables
         NewUsername.OnValueChangedAsObservable().Subscribe(username => VerifyEmail(username));
@@ -51,6 +58,7 @@ public class FirebassController : MonoBehaviour
     {
         // SignInButton.onClick.AddListener(() => Database.Instance.DebugSetSignedIn());
         ButtonOpenUserSignupWindow.onClick.AddListener(() => UserCreationPanel.gameObject.SetActive(true));
+        ButtonUserPanelLogout.onClick.AddListener(() => Database.Instance.SignOut());
         ButtonNewUser.onClick.AddListener(() => {
             //only try logging in if username and password are valid-ish (firebase does its own validation)
             if (isValidEmail(NewUsername.text) && isValidPassword(NewPassword.text))
@@ -95,11 +103,25 @@ public class FirebassController : MonoBehaviour
     bool isValidEmail(string email) => new Regex("^\\S+@\\S+\\.\\S+$").IsMatch(email) | email.Length < 2;
     bool isValidPassword(string password) => password.Length > 6;
 
-    void ShowSignInUI(bool isSignedIn)
+    void OnLogInStatusChanged(bool isSignedIn)
     {
         Debug.Log("Signed in? = " + isSignedIn);
         SignInSignUpPanel.gameObject.SetActive(!isSignedIn);
+        NewUsername.text =   "";
+        NewPassword.text =   "";
+        LoginUsername.text = "";
+        LoginPassword.text = "";
+
+        UserPanel.gameObject.SetActive(isSignedIn);
     }
+    void OnUserNameChanged(string username)
+    {
+        if (username is null) return;
+        TextUserPanelUsername.text = username.Substring(0,username.IndexOf("@"));
+    }
+
+
+
     public void LoginErrorCallback(System.Exception e)
     {
         UserCreationFailPanel.gameObject.SetActive(true);

@@ -1643,6 +1643,9 @@ MonoBehaviour:
   NewPassword: {fileID: 8294567500772291291}
   UserCreationPasswordErrorText: {fileID: 1566495648727689690}
   ButtonNewUser: {fileID: 8294567502326510061}
+  UserPanel: {fileID: 8294567500678853240}
+  TextUserPanelUsername: {fileID: 8294567502130961714}
+  ButtonUserPanelLogout: {fileID: 8294567501706914735}
 --- !u!1 &8294567501268151114
 GameObject:
   m_ObjectHideFlags: 0

@@ -2156,6 +2156,14 @@ PrefabInstance:
       propertyPath: ButtonOpenUserSignupWindow
       value: 
       objectReference: {fileID: 885679026}
+    - target: {fileID: 8294567500678853240, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -108
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294567500678853241, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8294567501151201812, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
       propertyPath: m_Pivot.x
       value: 0

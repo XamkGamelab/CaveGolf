@@ -768,7 +768,6 @@ GameObject:
   - component: {fileID: 8294567500827839277}
   - component: {fileID: 8294567500827839279}
   - component: {fileID: 8294567500827839276}
-  - component: {fileID: 1538893257907477252}
   m_Layer: 5
   m_Name: LeaderboardEntry
   m_TagString: Untagged
@@ -835,18 +834,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1538893257907477252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294567500827839250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c857cf7c100267b47a88a072cae0783e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8294567500859659810
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,8 +13,12 @@ public class UIManager : SingletonMono<UIManager>
     [Header("Main Menu")]
     [SerializeField] Canvas UIMainMenu;
     [SerializeField] Button ButtonMainMenuStartGame,ButtonMainMenuLeaderboard,ButtonMainMenuSettings,ButtonMainMenuCredits, ButtonMainMenuQuit;
+    [Header("Settings")]
     [SerializeField] Canvas settingsCanvas;
     [SerializeField] Button ButtonSettingsClose;
+    [Header("Credits")]
+    [SerializeField] Canvas CreditsCanvas;
+    [SerializeField] Button ButtonCloseCredits;
     [HideInInspector]public UIUserManager userManager;
     void Awake()
     {
@@ -27,15 +31,17 @@ public class UIManager : SingletonMono<UIManager>
             Score.Reset();        //REPLACE WITH RELEVANT WHEN IM UP TO HERE WITH DATABASE
             ShowCongrats(false);
         } );
-        ButtonMainMenuStartGame.onClick.AddListener(() => {
+        ButtonMainMenuStartGame.onClick.AddListener(async () => {
             Score.Reset();         //REPLACE WITH RELEVANT WHEN IM UP TO HERE WITH DATABASE
-            SceneManager.LoadSceneAsync("Level1");
-
+            await SceneManager.LoadSceneAsync("Level1");
+            UIMainMenu.gameObject.SetActive(false);
         });
         ButtonMainMenuQuit.onClick.AddListener(()=> Application.Quit());
         ButtonMainMenuSettings.onClick.AddListener(()=> settingsCanvas.gameObject.SetActive(true));
         ButtonSettingsClose.onClick.AddListener(   ()=> settingsCanvas.gameObject.SetActive(false));
         Score.GameCompleted.Subscribe(b => ShowCongrats(b));
+        ButtonMainMenuCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(true));
+        ButtonCloseCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(false));
     }
 
 

@@ -37,10 +37,6 @@ public class BInput : MonoBehaviour
         Arrow.startColor = startColor;
         Arrow.endColor = endColor;
         arrow = new Arrow();
-
-
-
-
     }
 
 

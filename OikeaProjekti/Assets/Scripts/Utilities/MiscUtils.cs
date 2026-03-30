@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Utils
 {
     public delegate void Callback(string message);

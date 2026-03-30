@@ -36,7 +36,7 @@ public class BInput : MonoBehaviour
         UpdateReferences();
         Arrow.startColor = startColor;
         Arrow.endColor = endColor;
-        arrow = new Arrow();
+        arrow = new Arrow(transform);
     }
 
 

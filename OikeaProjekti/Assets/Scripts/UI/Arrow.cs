@@ -8,9 +8,10 @@ public class Arrow
     public static Color startColor = Color.green;
     public static Color endColor = Color.red;
 
-    public Arrow()
+    public Arrow(Transform parent)
     {
-        obj = new GameObject();
+        obj = new GameObject("Arrow");
+        obj.transform.parent=parent;
         lineRenderer = obj.AddComponent<LineRenderer>();
         lineRenderer.sortingOrder = 1000;
         // Set the material

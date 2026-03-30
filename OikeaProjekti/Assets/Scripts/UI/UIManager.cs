@@ -19,7 +19,12 @@ public class UIManager : SingletonMono<UIManager>
     [Header("Credits")]
     [SerializeField] Canvas CreditsCanvas;
     [SerializeField] Button ButtonCloseCredits;
+    [Header("Pause")]
+    [SerializeField] PauseMenu pauseMenu;
+
+
     [HideInInspector]public UIUserManager userManager;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -55,12 +60,18 @@ public class UIManager : SingletonMono<UIManager>
     }
 
     void OnSceneChanged(Scene curr, Scene next){
-        if(next.buildIndex == 0)
+        if(next.buildIndex != 0) UIMainMenu.gameObject.SetActive(false);
+        if (next.buildIndex == 0)
         {
             UIMainMenu.gameObject.SetActive(true);
         }
     }
     void OnEnable() => SceneManager.activeSceneChanged += OnSceneChanged;
     void OnDisable() => SceneManager.activeSceneChanged -= OnSceneChanged;
-
+    [RuntimeInitializeOnLoadMethod]
+    static void BootStrap()
+    {
+        GameObject g = (GameObject)Resources.Load("UIManager");
+        Instantiate(g);
+    }
 }

@@ -270,7 +270,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4302133654106221453}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: SettingsClose
         m_Mode: 1
@@ -706,7 +706,6 @@ GameObject:
   - component: {fileID: 4719672246379147260}
   - component: {fileID: 1228161775422806048}
   - component: {fileID: 1310197346243510589}
-  - component: {fileID: 4302133654106221453}
   - component: {fileID: -3861654701820054374}
   m_Layer: 5
   m_Name: CanvasSettings
@@ -798,21 +797,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4302133654106221453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053698949742936591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f063363f59588d147ab7160386cbfeaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 2380020701550083523}
-  muteToggle: {fileID: 0}
-  pauseMenu: {fileID: 0}
 --- !u!114 &-3861654701820054374
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+
 public class Hole : MonoBehaviour
 {
     [SerializeField]
@@ -8,11 +9,10 @@ public class Hole : MonoBehaviour
     private void OnTriggerEnter2D()
     {
         Score.UpdateTotal();
-            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1)
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1)
         {
             SceneManager.LoadScene(0);
-            Debug.LogError("MainMenu!");
-            Score.GameCompleted = true;
+            Score.GameCompleted.Value = true;
 
         }
         else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

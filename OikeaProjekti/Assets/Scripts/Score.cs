@@ -1,4 +1,5 @@
 using TMPro;
+using UniRx;
 using UnityEngine;
 
 public class Score : MonoBehaviour
@@ -8,7 +9,7 @@ public class Score : MonoBehaviour
     public static int Total { get; private set; }
 
     public static int HighScore = 0;
-    public static bool GameCompleted = false;
+    public static ReactiveProperty<bool> GameCompleted = new(false);
 
     public static void Add(int i)
     {
@@ -29,7 +30,7 @@ public class Score : MonoBehaviour
         Total = 0;
         Local = 0;
         Instance?.UI_UPADTE();
-        GameCompleted = false;
+        GameCompleted.Value = false;
     }
 
     public static void SaveHighScore()

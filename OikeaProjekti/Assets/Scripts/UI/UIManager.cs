@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UniRx;
+using UniRx.Triggers;
+using System;
 public class UIManager : SingletonMono<UIManager>
 {
     [SerializeField]UIUserManager UserManagerPrefab;
@@ -21,7 +23,8 @@ public class UIManager : SingletonMono<UIManager>
     [SerializeField] Button ButtonCloseCredits;
     [Header("Pause")]
     [SerializeField] PauseMenu pauseMenu;
-
+    [Header("Misc")]
+    [SerializeField] Canvas TutorialCanvas;
 
     [HideInInspector]public UIUserManager userManager;
 
@@ -61,15 +64,24 @@ public class UIManager : SingletonMono<UIManager>
     }
 
     void OnSceneChanged(Scene curr, Scene next){
-        if (next.buildIndex != 0)
-        {
-            pauseMenu.transform.parent.gameObject.SetActive(true);
-            UIMainMenu.gameObject.SetActive(false);
-        }
         if (next.buildIndex == 0)
         {
             pauseMenu.transform.parent.gameObject.SetActive(false);
             UIMainMenu.gameObject.SetActive(true);
+        }
+        else
+        {
+            pauseMenu.transform.parent.gameObject.SetActive(true);
+            UIMainMenu.gameObject.SetActive(false);
+        }
+        if (next.buildIndex == 1)
+        {
+            TutorialCanvas.gameObject.SetActive(true);
+            Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).Take(1).Subscribe(_=>{
+                Debug.Log("Hide Tutorial",this);
+                TutorialCanvas.gameObject.SetActive(false);
+            });
+
         }
     }
     void OnEnable() => SceneManager.activeSceneChanged += OnSceneChanged;

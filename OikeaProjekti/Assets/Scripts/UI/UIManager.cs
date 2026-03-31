@@ -77,8 +77,8 @@ public class UIManager : SingletonMono<UIManager>
         if (next.buildIndex == 1)
         {
             TutorialCanvas.gameObject.SetActive(true);
-            //fade out and disable the tutorial on click
-            var click = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).Take(1);
+            //fade out and disable the tutorial on click, only slightly cursed of a reactive setup
+            var click = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).First();
             click.Subscribe(_ =>
             {
                 Debug.Log("Hide Tutorial", this);
@@ -87,7 +87,6 @@ public class UIManager : SingletonMono<UIManager>
                     .Subscribe(t => TutorialCanvas.GetComponent<CanvasGroup>().alpha = 1-t);
             });
             click.Delay(TimeSpan.FromSeconds(1)).Subscribe(_ => TutorialCanvas.gameObject.SetActive(false));
-
         }
     }
     void OnEnable() => SceneManager.activeSceneChanged += OnSceneChanged;

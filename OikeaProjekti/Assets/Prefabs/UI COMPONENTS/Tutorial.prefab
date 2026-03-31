@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 3280657473294966437}
   - component: {fileID: 4704011106292472048}
   - component: {fileID: 3925427633314809086}
-  - component: {fileID: 8861786493306285546}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -382,16 +381,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &8861786493306285546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6345986149351074408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cfcc1d71f8594f4dbcea8ab67fa05a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialCanvas: {fileID: 6345986149351074408}

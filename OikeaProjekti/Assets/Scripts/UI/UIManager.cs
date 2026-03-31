@@ -47,6 +47,7 @@ public class UIManager : SingletonMono<UIManager>
         Score.GameCompleted.Subscribe(b => ShowCongrats(b));
         ButtonMainMenuCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(true));
         ButtonCloseCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(false));
+        OnSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
     }
 
 
@@ -60,14 +61,20 @@ public class UIManager : SingletonMono<UIManager>
     }
 
     void OnSceneChanged(Scene curr, Scene next){
-        if(next.buildIndex != 0) UIMainMenu.gameObject.SetActive(false);
+        if (next.buildIndex != 0)
+        {
+            pauseMenu.transform.parent.gameObject.SetActive(true);
+            UIMainMenu.gameObject.SetActive(false);
+        }
         if (next.buildIndex == 0)
         {
+            pauseMenu.transform.parent.gameObject.SetActive(false);
             UIMainMenu.gameObject.SetActive(true);
         }
     }
     void OnEnable() => SceneManager.activeSceneChanged += OnSceneChanged;
     void OnDisable() => SceneManager.activeSceneChanged -= OnSceneChanged;
+
     [RuntimeInitializeOnLoadMethod]
     static void BootStrap()
     {

@@ -19,6 +19,7 @@ public class Database : Singleton<Database>
         SignedIn.Value = false;
         User.Value = null;
     }
+
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to create an account with email ${email} and password ${password}");
@@ -47,6 +48,25 @@ public class Database : Singleton<Database>
         SignedIn.Value = true;
         Debug.Log("Task Done");
     }
+    //private void AuthStateChanged(object sender, EventArgs e) { 
+    //    FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+    //    bool signedIn = User.Value != auth.CurrentUser && auth.CurrentUser != null && auth.CurrentUser.IsValid();
+    //    if(!signedIn && User != null)
+    //    {
+    //        Debug.Log("Signed out" + User.Value.UserId);
+    //    }
+    //    User.Value = auth.CurrentUser;
+    //    if (signedIn)
+    //    {
+    //        Debug.Log("Signed in" + User.Value.UserId);
+    //    }
+    //}
+
+
+
+
+
+
     async public void SignIn(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to sign in with email ${email} and password ${password}");

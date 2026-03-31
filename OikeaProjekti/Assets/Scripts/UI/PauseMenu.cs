@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] public GameObject pauseMenu;
-    BInput ballInput => transform.parent.GetComponentInChildren<BInput>();
+    BInput ballInput => FindFirstObjectByType<BInput>();
 
     public void Pause()
     {

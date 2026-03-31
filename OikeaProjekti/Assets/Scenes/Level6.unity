@@ -1005,22 +1005,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159617372579000429, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2934255829343426883, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: m_Mass
       value: 0.45
@@ -1031,11 +1015,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: HitForceMultiplier
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8027102595930458576, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: StandStillSpeedThreshold
       value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580779248522463344, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
+      propertyPath: MaxLaunchLength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580779248522463344, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
+      propertyPath: LaunchRampingFactor
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9089597379718440184, guid: 6552979b67e26d145b7154fe533a7724, type: 3}
       propertyPath: m_Name

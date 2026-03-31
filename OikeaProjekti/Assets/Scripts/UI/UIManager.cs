@@ -77,10 +77,16 @@ public class UIManager : SingletonMono<UIManager>
         if (next.buildIndex == 1)
         {
             TutorialCanvas.gameObject.SetActive(true);
-            Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).Take(1).Subscribe(_=>{
-                Debug.Log("Hide Tutorial",this);
-                TutorialCanvas.gameObject.SetActive(false);
+            //fade out and disable the tutorial on click
+            var click = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).Take(1);
+            click.Subscribe(_ =>
+            {
+                Debug.Log("Hide Tutorial", this);
+                Observable.EveryFixedUpdate().TakeUntil(Observable.Timer(TimeSpan.FromSeconds(1)))
+                    .Scan(0f,(total,_) => total + Time.fixedDeltaTime)
+                    .Subscribe(t => TutorialCanvas.GetComponent<CanvasGroup>().alpha = 1-t);
             });
+            click.Delay(TimeSpan.FromSeconds(1)).Subscribe(_ => TutorialCanvas.gameObject.SetActive(false));
 
         }
     }

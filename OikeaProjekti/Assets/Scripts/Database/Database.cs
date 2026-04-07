@@ -6,15 +6,18 @@ using UnityEngine;
 using UniRx;
 using Google.MiniJSON;
 using Firebase.Database;
+using System.Linq.Expressions;
 
 public class UserDetails
 {
     public string Username;
     public float TotalPlayTime;
-    public UserDetails(string _Username, float _TotalPlayTime)
+    public int score;
+    public UserDetails(string _Username, float _TotalPlayTime, int _score)
     {
         Username = _Username;
         TotalPlayTime = _TotalPlayTime;
+        score = _score;
     }
 }
 
@@ -33,8 +36,33 @@ public class Database : Singleton<Database>
         SignedIn.Value = false;
         User.Value = null;
     }
-
-
+    async public void SetUserRecord(FirebaseUser LoggedinUser, UserDetails user)
+    {
+            string json = JsonUtility.ToJson(user);
+            string userId = LoggedinUser.UserId;
+            await FirebaseDatabase.DefaultInstance.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(json);
+            Debug.Log(user);
+    }
+    async public void GetCurrentUserRecord()
+    {
+        Task<DataSnapshot> task = 
+            FirebaseDatabase.DefaultInstance
+            .GetReference("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/")
+            .GetValueAsync();
+        await task;
+        try
+        {
+            DataSnapshot snapshot = task.Result;
+            if (snapshot.Exists)
+            {
+                Debug.Log("SHAPSHOT: " + snapshot.GetRawJsonValue());
+            }
+        }
+        catch
+        {
+            Debug.Log("FAILED GETTING USER");
+        }
+    }
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to create an account with email ${email} and password ${password}");
@@ -62,15 +90,8 @@ public class Database : Singleton<Database>
         if(Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser is not null) User.Value = FirebaseAuth.DefaultInstance.CurrentUser;
         SignedIn.Value = true;
         Debug.Log("Task Done");
-        //here we test if we can write thigs properly, REMOVE WHEN WORKS RIGHT
-        {
-            UserDetails Test = new UserDetails (email, 5f);
-            string json = JsonUtility.ToJson(Test);
-            string userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-            FirebaseDatabase.DefaultInstance.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(json);
-        }
 
-
+        SetUserRecord(User.Value, new UserDetails(email,Time.time,1));
     }
     //private void AuthStateChanged(object sender, EventArgs e) { 
     //    FirebaseAuth auth = FirebaseAuth.DefaultInstance;
@@ -141,4 +162,5 @@ public class Database : Singleton<Database>
             }
         });
     }
+
 }

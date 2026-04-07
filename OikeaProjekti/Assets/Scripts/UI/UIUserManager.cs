@@ -28,7 +28,12 @@ public class UIUserManager : MonoBehaviour
     public RectTransform UserPanel;
     public Text   TextUserPanelUsername;
     public Button ButtonUserPanelLogout;
-
+    [Header("Debug")]
+    public Button ButtonCreateDebugUser;
+    public Button ButtonLoginDebugUser;
+    // public bool DebugLoginEnabled;
+    public string DebugUsername = "Debug@testi.com";
+    public string DebugPassword = "TestiTestiTesti";
 
     void Awake()
     {
@@ -70,6 +75,11 @@ public class UIUserManager : MonoBehaviour
                 Debug.LogWarning("Invalid Username or password?");
             }
         });
+        ButtonCreateDebugUser.onClick.AddListener(()=>  Database.Instance.SignUp(DebugUsername,DebugPassword, AccountCreationErrorCallback));
+        ButtonLoginDebugUser.onClick.AddListener(()=>  {
+            Database.Instance.SignIn(DebugUsername,DebugPassword,LoginErrorCallback);
+            Database.Instance.GetCurrentUserRecord();
+            });
         SignInButton.onClick.AddListener(() => Database.Instance.SignIn(LoginUsername.text,LoginPassword.text,LoginErrorCallback));
     }
 
@@ -107,6 +117,7 @@ public class UIUserManager : MonoBehaviour
     {
         Debug.Log("Signed in? = " + isSignedIn);
         SignInSignUpPanel.gameObject.SetActive(!isSignedIn);
+        UserCreationPanel.gameObject.SetActive(false);
         NewUsername.text =   "";
         NewPassword.text =   "";
         LoginUsername.text = "";

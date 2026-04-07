@@ -40,7 +40,6 @@ public class UIUserManager : MonoBehaviour
         // DontDestroyOnLoad(gameObject);
         InitButtons();
         //Only show the login  menu on awake if player is not already logged in.
-        if (!Database.Instance.SignedIn.Value) {SignInSignUpPanel.gameObject.SetActive(true);}
 
         /**********************************************************
          * REACTIVE PROPERTIES
@@ -50,13 +49,14 @@ public class UIUserManager : MonoBehaviour
          * 
          * I subscribe to it here to display/hide a login prompt based on its state
          *********************************************************/
-        Database.Instance.SignedIn.Subscribe(b => OnLogInStatusChanged(b));
+        Database.Instance.User.Subscribe(_ => OnLogInStatusChanged(Database.Instance.SignedIn));
         Database.Instance.User.Subscribe(u => OnUserNameChanged(u?.Email));
 
         //Check user input as the user types using  reactive observables
         NewUsername.OnValueChangedAsObservable().Subscribe(username => VerifyEmail(username));
         NewPassword.OnValueChangedAsObservable().Subscribe(password => VerifyPassword(password));
 
+        if (!Database.Instance.SignedIn) {SignInSignUpPanel.gameObject.SetActive(true);}
     }
     //Helper function to organize adding listeneres to all buttons
     public void InitButtons()
@@ -78,7 +78,6 @@ public class UIUserManager : MonoBehaviour
         ButtonCreateDebugUser.onClick.AddListener(()=>  Database.Instance.SignUp(DebugUsername,DebugPassword, AccountCreationErrorCallback));
         ButtonLoginDebugUser.onClick.AddListener(()=>  {
             Database.Instance.SignIn(DebugUsername,DebugPassword,LoginErrorCallback);
-            Database.Instance.GetCurrentUserRecord();
             });
         SignInButton.onClick.AddListener(() => Database.Instance.SignIn(LoginUsername.text,LoginPassword.text,LoginErrorCallback));
     }
@@ -115,14 +114,12 @@ public class UIUserManager : MonoBehaviour
 
     void OnLogInStatusChanged(bool isSignedIn)
     {
-        Debug.Log("Signed in? = " + isSignedIn);
         SignInSignUpPanel.gameObject.SetActive(!isSignedIn);
         UserCreationPanel.gameObject.SetActive(false);
         NewUsername.text =   "";
         NewPassword.text =   "";
         LoginUsername.text = "";
         LoginPassword.text = "";
-
         UserPanel.gameObject.SetActive(isSignedIn);
     }
     void OnUserNameChanged(string username)

@@ -4,9 +4,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UniRx;
-using Google.MiniJSON;
 using Firebase.Database;
-using System.Linq.Expressions;
 
 public class UserDetails
 {
@@ -23,8 +21,8 @@ public class UserDetails
 
 public class Database : Singleton<Database>
 {
-    //public bool SignedIn;
-    public ReactiveProperty<bool> SignedIn { get; private set; } = new();
+    public bool SignedIn => User.HasValue && User.Value != null && User.Value.IsValid();
+    // public ReactiveProperty<bool> SignedIn { get; private set; } = new();
     public ReactiveProperty<FirebaseUser> User { get; private set; } = new();
 
     Firebase.FirebaseApp app;
@@ -33,7 +31,6 @@ public class Database : Singleton<Database>
     {
         Debug.Log("INIT DATABASE");
         CheckDependencyStatus();
-        SignedIn.Value = false;
         User.Value = null;
     }
     async public void SetUserRecord(FirebaseUser LoggedinUser, UserDetails user)
@@ -41,18 +38,20 @@ public class Database : Singleton<Database>
             string json = JsonUtility.ToJson(user);
             string userId = LoggedinUser.UserId;
             await FirebaseDatabase.DefaultInstance.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(json);
-            Debug.Log(user);
+    }
+    async public Task<DataSnapshot> ReadDatabase(string path)
+    {
+            Task<DataSnapshot> task = FirebaseDatabase.DefaultInstance.GetReference(path).GetValueAsync();
+            await task;
+            return task.Result;
     }
     async public void GetCurrentUserRecord()
     {
-        Task<DataSnapshot> task = 
-            FirebaseDatabase.DefaultInstance
-            .GetReference("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/")
-            .GetValueAsync();
-        await task;
+
+        var ReadDb = ReadDatabase("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/");
         try
         {
-            DataSnapshot snapshot = task.Result;
+            DataSnapshot snapshot = ReadDb.Result;
             if (snapshot.Exists)
             {
                 Debug.Log("SHAPSHOT: " + snapshot.GetRawJsonValue());
@@ -73,8 +72,6 @@ public class Database : Singleton<Database>
             errorCallback(e);
             return;
         }
-
-        Debug.Log("Login task starting");
         Task createUser = FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(email, password);
         try
         {
@@ -88,24 +85,10 @@ public class Database : Singleton<Database>
             return;
         }
         if(Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser is not null) User.Value = FirebaseAuth.DefaultInstance.CurrentUser;
-        SignedIn.Value = true;
         Debug.Log("Task Done");
 
         SetUserRecord(User.Value, new UserDetails(email,Time.time,1));
     }
-    //private void AuthStateChanged(object sender, EventArgs e) { 
-    //    FirebaseAuth auth = FirebaseAuth.DefaultInstance;
-    //    bool signedIn = User.Value != auth.CurrentUser && auth.CurrentUser != null && auth.CurrentUser.IsValid();
-    //    if(!signedIn && User != null)
-    //    {
-    //        Debug.Log("Signed out" + User.Value.UserId);
-    //    }
-    //    User.Value = auth.CurrentUser;
-    //    if (signedIn)
-    //    {
-    //        Debug.Log("Signed in" + User.Value.UserId);
-    //    }
-    //}
     async public void SignIn(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to sign in with email ${email} and password ${password}");
@@ -127,19 +110,15 @@ public class Database : Singleton<Database>
             errorCallback(e);
             return;
         }
-        SignedIn.Value = true;
         User.Value = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
         Debug.Log("Signed in");
+        GetCurrentUserRecord();
     }
     async public void SignOut()
     {
+        Debug.Log("Signed Out");
         FirebaseAuth.DefaultInstance.SignOut();
-        SignedIn.Value = false;
-        User = null;
-    }
-    public void DebugSetSignedIn()
-    {
-        SignedIn.Value = true;
+        User.Value = null;
     }
     void CheckDependencyStatus()
     {
@@ -148,8 +127,7 @@ public class Database : Singleton<Database>
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
-                // Create and hold a reference to your FirebaseApp,
-                // where app is a Firebase.FirebaseApp property of your application class.
+
                 Debug.Log("Firebace dependecy status is available");
                 app = Firebase.FirebaseApp.DefaultInstance;
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
@@ -158,7 +136,6 @@ public class Database : Singleton<Database>
             {
                 UnityEngine.Debug.LogError(System.String.Format(
                   "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
-                // Firebase Unity SDK is not safe to use here.
             }
         });
     }

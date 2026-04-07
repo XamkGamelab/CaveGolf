@@ -47,7 +47,7 @@ public class UIManager : SingletonMono<UIManager>
         ButtonMainMenuQuit.onClick.AddListener(()=> Application.Quit());
         ButtonMainMenuSettings.onClick.AddListener(()=> settingsCanvas.gameObject.SetActive(true));
         ButtonSettingsClose.onClick.AddListener(   ()=> settingsCanvas.gameObject.SetActive(false));
-        Score.GameCompleted.Subscribe(b => ShowCongrats(b));
+        Score.GameCompleted.Where(b=> b).Subscribe(b => ShowCongrats(b));
         ButtonMainMenuCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(true));
         ButtonCloseCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(false));
         OnSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());

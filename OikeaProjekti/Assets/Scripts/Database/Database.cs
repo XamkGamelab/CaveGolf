@@ -4,6 +4,20 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UniRx;
+using Google.MiniJSON;
+using Firebase.Database;
+
+public class UserDetails
+{
+    public string Username;
+    public float TotalPlayTime;
+    public UserDetails(string _Username, float _TotalPlayTime)
+    {
+        Username = _Username;
+        TotalPlayTime = _TotalPlayTime;
+    }
+}
+
 public class Database : Singleton<Database>
 {
     //public bool SignedIn;
@@ -19,6 +33,7 @@ public class Database : Singleton<Database>
         SignedIn.Value = false;
         User.Value = null;
     }
+
 
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
@@ -47,6 +62,15 @@ public class Database : Singleton<Database>
         if(Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser is not null) User.Value = FirebaseAuth.DefaultInstance.CurrentUser;
         SignedIn.Value = true;
         Debug.Log("Task Done");
+        //here we test if we can write thigs properly, REMOVE WHEN WORKS RIGHT
+        {
+            UserDetails Test = new UserDetails (email, 5f);
+            string json = JsonUtility.ToJson(Test);
+            string userId = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            FirebaseDatabase.DefaultInstance.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(json);
+        }
+
+
     }
     //private void AuthStateChanged(object sender, EventArgs e) { 
     //    FirebaseAuth auth = FirebaseAuth.DefaultInstance;
@@ -61,12 +85,6 @@ public class Database : Singleton<Database>
     //        Debug.Log("Signed in" + User.Value.UserId);
     //    }
     //}
-
-
-
-
-
-
     async public void SignIn(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to sign in with email ${email} and password ${password}");
@@ -98,7 +116,6 @@ public class Database : Singleton<Database>
         SignedIn.Value = false;
         User = null;
     }
-
     public void DebugSetSignedIn()
     {
         SignedIn.Value = true;

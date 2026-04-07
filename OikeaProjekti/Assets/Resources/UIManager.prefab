@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UserManagerPrefab: {fileID: 353154798438039503, guid: be144816cf72ae84faee8de86a1c6d1a, type: 3}
-  debugHideLogin: 1
+  debugHideLogin: 0
   UICompletion: {fileID: 3041867241441551488}
   congratsText: {fileID: 5534687404438411454}
   UIMainMenu: {fileID: 6535400138903615356}

@@ -54,8 +54,27 @@ public class UIManager : SingletonMono<UIManager>
     }
 
 
+    void DisplayTutorial()
+    {
+        TutorialCanvas.gameObject.SetActive(true);
 
-    //kinda temporary logic, here until i have reworked things from the Hole class into here
+        //fade out and disable the tutorial on click, only slightly cursed of a reactive setup
+        var click = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).First();
+        click.Subscribe(_ =>
+        {
+            Debug.Log("Hide Tutorial", this);
+            Observable.EveryFixedUpdate().TakeUntil(Observable.Timer(TimeSpan.FromSeconds(1)))
+                .Scan(0f, (total, _) => total + Time.fixedDeltaTime)
+                .Subscribe(t => TutorialCanvas.GetComponent<CanvasGroup>().alpha = 1 - t);
+        });
+        click.Delay(TimeSpan.FromSeconds(1)).Subscribe(_ => TutorialCanvas.gameObject.SetActive(false));
+    }
+
+
+
+    //kinda temporary logic, here until i have moved some of the scoring features into a more sensible format
+
+    //to be called on when the game has been completed
     void ShowCongrats(bool value)
     {
         Debug.Log("Congrats dealt with");
@@ -76,19 +95,10 @@ public class UIManager : SingletonMono<UIManager>
         }
         if (next.buildIndex == 1)
         {
-            TutorialCanvas.gameObject.SetActive(true);
-            //fade out and disable the tutorial on click, only slightly cursed of a reactive setup
-            var click = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0)).First();
-            click.Subscribe(_ =>
-            {
-                Debug.Log("Hide Tutorial", this);
-                Observable.EveryFixedUpdate().TakeUntil(Observable.Timer(TimeSpan.FromSeconds(1)))
-                    .Scan(0f,(total,_) => total + Time.fixedDeltaTime)
-                    .Subscribe(t => TutorialCanvas.GetComponent<CanvasGroup>().alpha = 1-t);
-            });
-            click.Delay(TimeSpan.FromSeconds(1)).Subscribe(_ => TutorialCanvas.gameObject.SetActive(false));
+            DisplayTutorial();
         }
     }
+
     void OnEnable() => SceneManager.activeSceneChanged += OnSceneChanged;
     void OnDisable() => SceneManager.activeSceneChanged -= OnSceneChanged;
 

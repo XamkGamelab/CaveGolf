@@ -13,13 +13,11 @@ using Newtonsoft.Json;
 public class UserDetails
 {
     public string Username;
-    public float TotalPlayTime;
-    public int score;
+    public int highscore;
     public UserDetails(string _Username, float _TotalPlayTime, int _score)
     {
         Username = _Username;
-        TotalPlayTime = _TotalPlayTime;
-        score = _score;
+        highscore = _score;
     }
 }
 
@@ -51,6 +49,7 @@ public class Database : Singleton<Database>
 
     Firebase.FirebaseApp app;
 
+    
     private async void AddScoreToLeaders(string username, int score, DatabaseReference leaderBoardRef)
     {
         Task<DataSnapshot> updateLeaderboards = leaderBoardRef.RunTransaction(mutableData =>
@@ -111,11 +110,6 @@ public class Database : Singleton<Database>
             Debug.Log(l.Username + l.Score);
         }
     }
-
-
-
-
-
 
     //******************************************************
     //HANDLES THINGS RELATING TO SIGN IN, SIGN UP AND STARTUP

@@ -2,7 +2,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-using Unity.VisualScripting;
+using System.Threading.Tasks;
 
 public class UIUserManager : MonoBehaviour
 {
@@ -34,9 +34,9 @@ public class UIUserManager : MonoBehaviour
     // public bool DebugLoginEnabled;
     public string DebugUsername = "Debug@testi.com";
     public string DebugPassword = "TestiTestiTesti";
-    public void ShowLeaderboard()
+    public async Task ShowLeaderboard()
     {
-        Database.Instance.GetUserDetails(null);
+        Database.Instance.GetLeaderboardAsync();
     }
 
 

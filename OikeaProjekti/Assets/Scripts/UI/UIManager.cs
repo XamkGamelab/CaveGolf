@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UniRx;
 using UniRx.Triggers;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 public class UIManager : SingletonMono<UIManager>
 {
     [SerializeField]UIUserManager UserManagerPrefab;
@@ -49,6 +50,7 @@ public class UIManager : SingletonMono<UIManager>
         ButtonSettingsClose.onClick.AddListener(   ()=> settingsCanvas.gameObject.SetActive(false));
         Score.GameCompleted.Where(b=> b).Subscribe(b => ShowCongrats(b));
         ButtonMainMenuCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(true));
+        ButtonMainMenuLeaderboard.onClick.AddListener(() => userManager.ShowLeaderboard());
         ButtonCloseCredits.onClick.AddListener(() => CreditsCanvas.gameObject.SetActive(false));
         OnSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
     }

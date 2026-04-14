@@ -34,6 +34,12 @@ public class UIUserManager : MonoBehaviour
     // public bool DebugLoginEnabled;
     public string DebugUsername = "Debug@testi.com";
     public string DebugPassword = "TestiTestiTesti";
+    public void ShowLeaderboard()
+    {
+        Database.Instance.GetUserDetails(()=> null);
+    }
+
+
 
     void Awake()
     {
@@ -59,7 +65,7 @@ public class UIUserManager : MonoBehaviour
         if (!Database.Instance.SignedIn) {SignInSignUpPanel.gameObject.SetActive(true);}
     }
     //Helper function to organize adding listeneres to all buttons
-    public void InitButtons()
+    void InitButtons()
     {
         // SignInButton.onClick.AddListener(() => Database.Instance.DebugSetSignedIn());
         ButtonOpenUserSignupWindow.onClick.AddListener(() => UserCreationPanel.gameObject.SetActive(true));
@@ -127,8 +133,6 @@ public class UIUserManager : MonoBehaviour
         if (username is null) return;
         TextUserPanelUsername.text = username.Substring(0,username.IndexOf("@"));
     }
-
-
 
     public void LoginErrorCallback(System.Exception e)
     {

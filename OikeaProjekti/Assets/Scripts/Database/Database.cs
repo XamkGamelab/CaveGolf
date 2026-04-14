@@ -8,19 +8,20 @@ using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
+using Firebase;
 
 
 public class UserDetails
 {
     public string Username;
-    public int highscore;
-    public UserDetails(string _Username, float _TotalPlayTime, int _score)
+    public int bestscore;
+    public UserDetails(string _Username, int _score)
     {
         Username = _Username;
-        highscore = _score;
+        bestscore = _score;
     }
 }
-
 public class Leaderboard
 {
     public const int MaxEntries = 10;
@@ -44,14 +45,64 @@ public struct LeaderboardEntry
 public class Database : Singleton<Database>
 {
     public bool SignedIn => User.HasValue && User.Value != null && User.Value.IsValid();
-    // public ReactiveProperty<bool> SignedIn { get; private set; } = new();
     public ReactiveProperty<FirebaseUser> User { get; private set; } = new();
 
     Firebase.FirebaseApp app;
 
-    
+    private Task<DataSnapshot> ReadDatabaseAsync(string path)
+    {
+        return FirebaseDatabase.DefaultInstance.GetReference(path).GetValueAsync();
+    }
+    private Task<DataSnapshot> ReadUserAsync()
+    {
+        return ReadDatabaseAsync("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/");
+    }
+
+    //nonfunctional for now
+    public async void GetUserDetails(Func<UserDetails> callback){
+        Task<DataSnapshot> t = ReadUserAsync();
+        try
+        {
+            await t;   
+            Debug.Log(t.Result.GetRawJsonValue());
+        }
+        catch(Exception ex)
+        {
+            Debug.LogError("FAILED TO GET USER DETAILS.");
+            Debug.LogException(ex);
+        }
+    }
+    async void SetUserRecord(FirebaseUser LoggedinUser, UserDetails user)
+    {
+        string json = JsonUtility.ToJson(user);
+        string userId = LoggedinUser.UserId;
+        await FirebaseDatabase.DefaultInstance.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(json);
+    }
     private async void AddScoreToLeaders(string username, int score, DatabaseReference leaderBoardRef)
     {
+
+        Task<DataSnapshot> t = ReadUserAsync();
+        try
+        {
+            await t;
+            if(t.Result == null ||t.Result.GetRawJsonValue() == null) {
+                SetUserRecord(FirebaseAuth.DefaultInstance.CurrentUser, new UserDetails(username,score));
+            }
+            else
+            {
+                UserDetails u = JsonConvert.DeserializeObject<UserDetails>(t.Result.GetRawJsonValue());
+                Debug.Log($"USER SCORE IN FILE IS: {u.Username} with score {u.bestscore}");
+                if(u.bestscore < score) return; //ENABLE THIS BY THE END, DISABLED FOR TESTING
+                SetUserRecord(FirebaseAuth.DefaultInstance.CurrentUser, new UserDetails(username,score));
+            }
+        } 
+        catch(Exception e)
+        {
+            Debug.LogError(e.ToString());
+            return;
+        }
+
+
         Task<DataSnapshot> updateLeaderboards = leaderBoardRef.RunTransaction(mutableData =>
         {
             //All database entries are basically objects with:
@@ -66,8 +117,8 @@ public class Database : Singleton<Database>
             //if leaderboard is filled, try and find a way to create the new entry
             else if (mutableData.ChildrenCount >= Leaderboard.MaxEntries){
                 //LINQ hell that gets the leaderboard entry with the lowest score
-                object entryWithLowestScore = leaders.OrderBy(entry => (int)((Dictionary<string,object>)entry)["Score"]).FirstOrDefault();
-                int minScore = (int)((Dictionary<string,object>)entryWithLowestScore)["Score"];
+                object entryWithWorstScore = leaders.OrderBy(entry => (int)((Dictionary<string,object>)entry)["Score"]).FirstOrDefault();
+                int minScore = (int)((Dictionary<string,object>)entryWithWorstScore)["Score"];
 
                 if(minScore > score)//new score is lower than existing scores, so we abort
 
@@ -75,7 +126,7 @@ public class Database : Singleton<Database>
                     return TransactionResult.Abort();
                 }
                 else{ //We have some lower score thing that can be safely removed
-                    leaders.Remove(entryWithLowestScore);
+                    leaders.Remove(entryWithWorstScore);
                 }
             }
             /////////////////////////////////////////////
@@ -168,8 +219,7 @@ public class Database : Singleton<Database>
         }
         User.Value = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
         Debug.Log("Signed in");
-
-        AddScoreToLeaders(email,5,FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards"));
+        AddScoreToLeaders(email,3,FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards"));
     }
     async public void SignOut()
     {

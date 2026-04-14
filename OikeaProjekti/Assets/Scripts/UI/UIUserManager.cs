@@ -2,8 +2,6 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
 public class UIUserManager : MonoBehaviour
 {
     //all relevant UI items
@@ -36,7 +34,11 @@ public class UIUserManager : MonoBehaviour
     public string DebugPassword = "TestiTestiTesti";
     public async void ShowLeaderboard()
     {
-        Database.Instance.GetLeaderboardAsync();
+         Leaderboard leaderboard = await Database.Instance.GetLeaderboardAsync();
+        foreach(LeaderboardEntry l in leaderboard.leaderboards)
+        {
+            Debug.Log($"l.Username l.Score");
+        }
     }
 
 

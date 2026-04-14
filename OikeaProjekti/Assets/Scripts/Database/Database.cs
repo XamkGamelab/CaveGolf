@@ -8,6 +8,7 @@ using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 public class UserDetails
@@ -64,11 +65,15 @@ public class Database : Singleton<Database>
             Debug.LogException(ex);
         }
     }
-    public async void GetLeaderboardAsync()
+    public async Task<Leaderboard> GetLeaderboardAsync()
     {
         var ds = ReadLeaderboardAsync();
         await ds;
-        Debug.Log(ds.Result.GetRawJsonValue());
+        string updateResult = "{\"leaderboards\":" +ds.Result.GetRawJsonValue() + "}";
+        Debug.Log("JSON : " + updateResult);
+        Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(updateResult);
+        leaderboard.leaderboards = leaderboard.leaderboards.OrderByDescending(l => l.Score).ToList();
+        return leaderboard;
     }
 
     private async void AddScoreToLeaders(string username, int score)
@@ -147,15 +152,6 @@ public class Database : Singleton<Database>
                 Debug.Log(ex.ToString());
             }
         }
-        // string updateResult = "{\"leaderboards\":" +updateLeaderboards.Result.GetRawJsonValue() + "}";
-        // Debug.Log("JSON : " + updateResult);
-        // Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(updateResult);
-        // leaderboard.leaderboards = leaderboard.leaderboards.OrderByDescending(l => l.Score).ToList();
-        // Debug.Log("---------------------------------------\n LEADERBOARD OBJECT::" + leaderboard);
-        // foreach(LeaderboardEntry l in leaderboard.leaderboards)
-        // {
-        //     Debug.Log(l.Username + l.Score);
-        // }
     }
     async void SetUserRecord(FirebaseUser LoggedinUser, UserDetails user)
     {

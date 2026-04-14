@@ -36,7 +36,7 @@ public class UIUserManager : MonoBehaviour
     public string DebugPassword = "TestiTestiTesti";
     public void ShowLeaderboard()
     {
-        Database.Instance.GetUserDetails(()=> null);
+        Database.Instance.GetUserDetails(null);
     }
 
 
@@ -90,7 +90,7 @@ public class UIUserManager : MonoBehaviour
 
     void VerifyEmail(string username)
     {
-        Debug.Log("Verifying email: " +username);
+        // Debug.Log("Verifying email: " +username);
         if (isValidEmail(username))
         {
             UserCreationEmailErrorText.gameObject.SetActive(false);
@@ -103,7 +103,7 @@ public class UIUserManager : MonoBehaviour
     }
     void VerifyPassword(string password)
     {
-        Debug.Log("Verifying password: " + password);
+        // Debug.Log("Verifying password: " + password);
         if (isValidPassword(password))
         {            
             UserCreationPasswordErrorText.gameObject.SetActive(false);

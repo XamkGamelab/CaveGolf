@@ -8,8 +8,6 @@ using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
-using Firebase;
 
 
 public class UserDetails
@@ -55,10 +53,10 @@ public class Database : Singleton<Database>
         try
         {
             await t;
-            if(t.Result == null) return;
-                UserDetails u = JsonConvert.DeserializeObject<UserDetails>(t.Result.GetRawJsonValue());
-                Debug.Log(t.Result.GetRawJsonValue());
-                callback(u);
+            if (t.Result == null) return;
+            UserDetails u = JsonConvert.DeserializeObject<UserDetails>(t.Result.GetRawJsonValue());
+            Debug.Log(t.Result.GetRawJsonValue());
+            callback(u);
         }
         catch (Exception ex)
         {
@@ -66,11 +64,16 @@ public class Database : Singleton<Database>
             Debug.LogException(ex);
         }
     }
-
-
-    private async void AddScoreToLeaders(string username, int score, DatabaseReference leaderBoardRef)
+    public async void GetLeaderboardAsync()
     {
+        var ds = ReadLeaderboardAsync();
+        await ds;
+        Debug.Log(ds.Result.GetRawJsonValue());
+    }
 
+    private async void AddScoreToLeaders(string username, int score)
+    {
+        DatabaseReference leaderBoardRef = FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards");
         Task<DataSnapshot> t = ReadUserAsync();
         try
         {
@@ -101,17 +104,18 @@ public class Database : Singleton<Database>
             //"score": int
             List<object> leaders = mutableData.Value as List<object>;
             //if leaderboard is null we create a new one
-            if(leaders == null)
+            if (leaders == null)
             {
                 leaders = new List<object>();
             }
             //if leaderboard is filled, try and find a way to create the new entry
-            else if (mutableData.ChildrenCount >= Leaderboard.MaxEntries){
+            else if (mutableData.ChildrenCount >= Leaderboard.MaxEntries)
+            {
                 //LINQ hell that gets the leaderboard entry with the lowest score
-                object entryWithWorstScore = leaders.OrderBy(entry => (long)((Dictionary<string,object>)entry)["score"]).FirstOrDefault();
-                long minScore = (long)((Dictionary<string,object>)entryWithWorstScore)["score"];
+                object entryWithWorstScore = leaders.OrderBy(entry => (long)((Dictionary<string, object>)entry)["score"]).FirstOrDefault();
+                long minScore = (long)((Dictionary<string, object>)entryWithWorstScore)["score"];
 
-                if(minScore > score)//new score is lower than existing scores, so we abort
+                if (minScore > score)//new score is lower than existing scores, so we abort
 
                 {
                     return TransactionResult.Abort();
@@ -124,7 +128,7 @@ public class Database : Singleton<Database>
             /////////////////////////////////////////////
             //We can now add our score to the leaderboard
             /////////////////////////////////////////////
-            Dictionary<string,object> newScore = new();
+            Dictionary<string, object> newScore = new();
             newScore["score"] = score;
             newScore["username"] = username;
             leaders.Add(newScore);
@@ -180,6 +184,10 @@ public class Database : Singleton<Database>
     {
         return ReadDatabaseAsync("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/");
     }
+    private Task<DataSnapshot> ReadLeaderboardAsync()
+    {
+         return FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards").GetValueAsync();
+    }
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
         Debug.Log($"Attempting to create an account with email ${email} and password ${password}");
@@ -228,7 +236,7 @@ public class Database : Singleton<Database>
         }
         User.Value = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
         Debug.Log("Signed in");
-        AddScoreToLeaders(email, 3, FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards"));
+        AddScoreToLeaders(email, 3);
     }
     async public void SignOut()
     {

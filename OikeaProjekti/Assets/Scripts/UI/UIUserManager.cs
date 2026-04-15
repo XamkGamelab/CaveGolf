@@ -2,6 +2,10 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.Collections.Generic;
+using System;
+
 public class UIUserManager : MonoBehaviour
 {
     //all relevant UI items
@@ -32,13 +36,43 @@ public class UIUserManager : MonoBehaviour
     // public bool DebugLoginEnabled;
     public string DebugUsername = "Debug@testi.com";
     public string DebugPassword = "TestiTestiTesti";
+    [Header("Leaderboard")]
+    public int MaxLeaderboardEntries = 10;
+    public UILeaderboardEntry leaderboardEntryPrefab;
+    public RectTransform LeaderboardPanel;
+    public VerticalLayoutGroup LeaderboardContainer;
+    public Button ButtonLeaderboardClose;
+    [SerializeField]
+    List<UILeaderboardEntry> leaderboardEntries;
+
     public async void ShowLeaderboard()
     {
-         Leaderboard leaderboard = await Database.Instance.GetLeaderboardAsync();
-        foreach(LeaderboardEntry l in leaderboard.leaderboards)
+        Leaderboard leaderboard = await Database.Instance.GetLeaderboardAsync();
+        if(leaderboardEntries is not null)
         {
-            Debug.Log($"l.Username l.Score");
+            foreach(var e in leaderboardEntries)
+            {
+                Destroy(e.gameObject);
+            }
+            leaderboardEntries = null;
         }
+        leaderboardEntries = new();
+        foreach(LeaderboardEntry l in leaderboard.leaderboards.Take(MaxLeaderboardEntries))
+        {
+            UILeaderboardEntry e = Instantiate<UILeaderboardEntry>(leaderboardEntryPrefab).Init(l);
+            e.transform.SetParent(LeaderboardContainer.transform);
+            leaderboardEntries.Add(e);
+        }
+        LeaderboardPanel.gameObject.SetActive(true);
+    }
+    public void CLoseLeaderboard()
+    {
+        foreach(var e in leaderboardEntries)
+            {
+                Destroy(e.gameObject);
+            }
+            leaderboardEntries = null;
+        LeaderboardPanel.gameObject.SetActive(false);
     }
 
 
@@ -88,6 +122,7 @@ public class UIUserManager : MonoBehaviour
             Database.Instance.SignIn(DebugUsername,DebugPassword,LoginErrorCallback);
             });
         SignInButton.onClick.AddListener(() => Database.Instance.SignIn(LoginUsername.text,LoginPassword.text,LoginErrorCallback));
+        ButtonLeaderboardClose.onClick.AddListener(()=> CLoseLeaderboard());
     }
 
     void VerifyEmail(string username)

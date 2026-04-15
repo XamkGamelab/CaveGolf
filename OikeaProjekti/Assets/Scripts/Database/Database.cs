@@ -72,7 +72,7 @@ public class Database : Singleton<Database>
         string updateResult = "{\"leaderboards\":" +ds.Result.GetRawJsonValue() + "}";
         Debug.Log("JSON : " + updateResult);
         Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(updateResult);
-        leaderboard.leaderboards = leaderboard.leaderboards.OrderByDescending(l => l.Score).ToList();
+        leaderboard.leaderboards = leaderboard.leaderboards.OrderBy(l => l.Score).ToList();
         return leaderboard;
     }
 

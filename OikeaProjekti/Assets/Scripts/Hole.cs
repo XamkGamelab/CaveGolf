@@ -12,8 +12,7 @@ public class Hole : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1)
         {
             SceneManager.LoadScene(0);
-            Score.GameCompleted.Value = true;
-
+            Score.OnFinishGame();
         }
         else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

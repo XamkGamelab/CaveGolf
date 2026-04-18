@@ -7,8 +7,6 @@ public class Score : MonoBehaviour
 
     public static int Local { get; private set; }
     public static int Total { get; private set; }
-
-    public static int HighScore = 0;
     public static ReactiveProperty<bool> GameCompleted = new(false);
 
     public static void Add(int i)
@@ -32,22 +30,11 @@ public class Score : MonoBehaviour
         Instance?.UI_UPADTE();
         GameCompleted.Value = false;
     }
-
-    public static void SaveHighScore()
+    public static void OnFinishGame()
     {
-        if(Total < HighScore)
-        {
-            HighScore = Total;
-        }
-
+        GameCompleted.Value = true;
+        Database.Instance.RecordScore(Total);
     }
-    public static void Load()
-    {
-        Debug.LogError("ERROR: SCORE LOADING IS NOT IMPLEMENTED YET");
-    }
-
-
-
     // things used by instances of script, should not be accessed elsewhere
 
     [HideInInspector]
@@ -69,16 +56,12 @@ public class Score : MonoBehaviour
             totalString = " " + totalString;
             }
         }
-
-        //text.text = $"TOTAL: {Total.ToString()} \n {(Local != 0 ? ("Level:" + Local.ToString()) : "")}";
         text.text =  totalString + "<br>" + localString;
     }
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
         UI_UPADTE();
-        //if (Instance != null) Debug.LogWarning("Replacing existing Score instance with new one, there may be multiple in scene?");
         Instance = this;
-        //DontDestroyOnLoad(this.gameObject);
     }
 }

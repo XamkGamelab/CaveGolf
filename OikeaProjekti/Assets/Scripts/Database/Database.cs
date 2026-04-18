@@ -8,7 +8,6 @@ using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using UnityEngine.SocialPlatforms.Impl;
 
 
 public class UserDetails
@@ -69,12 +68,17 @@ public class Database : Singleton<Database>
     {
         var ds = ReadLeaderboardAsync();
         await ds;
-        string updateResult = "{\"leaderboards\":" +ds.Result.GetRawJsonValue() + "}";
+        string updateResult = "{\"leaderboards\":" + ds.Result.GetRawJsonValue() + "}";
         Debug.Log("JSON : " + updateResult);
         Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(updateResult);
         leaderboard.leaderboards = leaderboard.leaderboards.OrderBy(l => l.Score).ToList();
         return leaderboard;
     }
+    public void RecordScore(int score)
+    {
+        AddScoreToLeaders(Utils.DbUtils.EmailToUsername(User.Value.Email), score);
+    }
+
 
     private async void AddScoreToLeaders(string username, int score)
     {
@@ -91,7 +95,7 @@ public class Database : Singleton<Database>
             {
                 UserDetails u = JsonConvert.DeserializeObject<UserDetails>(t.Result.GetRawJsonValue());
                 Debug.Log($"USER SCORE IN FILE IS: {u.Username} with score {u.bestscore}");
-                if (u.bestscore < score) return; //ENABLE THIS BY THE END, DISABLED FOR TESTING
+                if (u.bestscore <= score) return;
                 SetUserRecord(FirebaseAuth.DefaultInstance.CurrentUser, new UserDetails(username, score));
             }
         }
@@ -182,7 +186,7 @@ public class Database : Singleton<Database>
     }
     private Task<DataSnapshot> ReadLeaderboardAsync()
     {
-         return FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards").GetValueAsync();
+        return FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards").GetValueAsync();
     }
     async public void SignUp(string email, string password, Utils.ErrorCallback errorCallback)
     {
@@ -232,7 +236,6 @@ public class Database : Singleton<Database>
         }
         User.Value = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
         Debug.Log("Signed in");
-        AddScoreToLeaders(email, 3);
     }
     async public void SignOut()
     {
@@ -259,37 +262,4 @@ public class Database : Singleton<Database>
             }
         });
     }
-
-    /*******************************************************************
-    **OBSOLETE STUFF RELATING TO USER RECORDS KEEPING. 
-    **
-    async public void SetUserRecord(FirebaseUser LoggedinUser, UserDetails user)
-    {
-        string json = JsonUtility.ToJson(user);
-        string userId = LoggedinUser.UserId;
-        await FirebaseDatabase.DefaultInstance.RootReference.Child("users").Child(userId).SetRawJsonValueAsync(json);
-    }
-    async public Task<DataSnapshot> ReadDatabase(string path)
-    {
-        Task<DataSnapshot> task = FirebaseDatabase.DefaultInstance.GetReference(path).GetValueAsync();
-        await task;
-        return task.Result;
-    }
-    async public void GetCurrentUserRecord()
-    {
-        var ReadDb = ReadDatabase("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/");
-        try
-        {
-            DataSnapshot snapshot = ReadDb.Result;
-            if (snapshot.Exists)
-            {
-                Debug.Log("SHAPSHOT: " + snapshot.GetRawJsonValue());
-            }
-        }
-        catch
-        {
-            Debug.Log("FAILED GETTING USER");
-        }
-    }
-    */
 }

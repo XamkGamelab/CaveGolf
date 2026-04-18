@@ -36,7 +36,6 @@ public class UIManager : SingletonMono<UIManager>
         if(debugHideLogin) userManager.gameObject.SetActive(false);
         UICompletion.GetComponentInChildren<Button>().onClick.AddListener(() =>
         {
-            Score.SaveHighScore();//REPLACE WITH RELEVANT WHEN IM UP TO HERE WITH DATABASE
             Score.Reset();        //REPLACE WITH RELEVANT WHEN IM UP TO HERE WITH DATABASE
             ShowCongrats(false);
         } );
@@ -81,7 +80,7 @@ public class UIManager : SingletonMono<UIManager>
     {
         Debug.Log("Congrats dealt with");
         UICompletion.gameObject.SetActive(value);
-        congratsText.text = $"YOUR SCORE WAS:\r\n{Score.Total}\r\n\r\n Prev Best:\r\n{Score.HighScore}";
+        congratsText.text = $"YOUR SCORE WAS:\r\n{Score.Total}\n   Check Leaderboard to compare!";
     }
 
     void OnSceneChanged(Scene curr, Scene next){

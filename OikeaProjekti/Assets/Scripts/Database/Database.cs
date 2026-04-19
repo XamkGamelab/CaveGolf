@@ -17,18 +17,23 @@ namespace Data
     public class Database : Singleton<Database>
     {
         Firebase.FirebaseApp app;
+        FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+
+        
         /// <summary>
         /// Is the User currently signed in with a valid account?
         /// </summary>
         /// <value> Current login status</value>
-        public bool IsSignedIn => User.HasValue && User.Value != null && User.Value.IsValid();
+        public bool IsSignedIn => CurrentUser.HasValue && CurrentUser.Value != null && CurrentUser.Value.IsValid();
+
+
         /// <summary>
         /// Current user and it's details.
         /// a UniRx *ReactiveProperty*, which allows it to be subscribed to
         /// so that logins/logouts can be dynamically responded to elsewhere
         /// </summary>
         /// <value>Currently Signed in user</value>
-        public ReactiveProperty<FirebaseUser> User { get; private set; } = new();
+        public ReactiveProperty<FirebaseUser> CurrentUser { get; private set; } = new();
 
         /// <summary>
         /// Asynchronous task that returns the current **FULL** leaderboard from server, sorted by score.
@@ -77,7 +82,7 @@ namespace Data
         /// <param name="score">int of the current score to be saved</param>
         public void RecordScore(int score)
         {
-            AddScoreToLeaders(Utils.DbUtils.EmailToUsername(User.Value.Email), score);
+            AddScoreToLeaders(new UserDetails(Utils.DbUtils.EmailToUsername(CurrentUser.Value.Email), score));
         }
         /******************************************************************
         ***
@@ -101,7 +106,7 @@ namespace Data
                 errorCallback(e);
                 return;
             }
-            Task signIn = FirebaseAuth.DefaultInstance.SignInWithEmailAndPasswordAsync(email, password);
+            Task signIn = auth.SignInWithEmailAndPasswordAsync(email, password);
 
             try
             {
@@ -113,7 +118,7 @@ namespace Data
                 errorCallback(e);
                 return;
             }
-            User.Value = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser;
+            CurrentUser.Value = auth.CurrentUser;
             Debug.Log(" Signed in");
         }
         /// <summary>
@@ -122,8 +127,8 @@ namespace Data
         async public void SignOut()
         {
             Debug.Log("Signed Out");
-            FirebaseAuth.DefaultInstance.SignOut();
-            User.Value = null;
+            auth.SignOut();
+            CurrentUser.Value = null;
         }
         /// <summary>
         /// Attempt to create a new user with given information
@@ -143,7 +148,7 @@ namespace Data
                 return;
             }
 
-            Task createUser = FirebaseAuth.DefaultInstance.CreateUserWithEmailAndPasswordAsync(email, password);
+            Task createUser = auth.CreateUserWithEmailAndPasswordAsync(email, password);
             try
             {
                 await createUser;
@@ -155,7 +160,7 @@ namespace Data
                 errorCallback(e);
                 return;
             }
-            if (Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser is not null) User.Value = FirebaseAuth.DefaultInstance.CurrentUser;
+            if (auth.CurrentUser is not null) CurrentUser.Value = auth.CurrentUser;
             Debug.Log("Task Done");
         }
 
@@ -167,7 +172,7 @@ namespace Data
         /// <param name="score">score</param>
         /// <remarks>Has a few funny pieces of functionality: Updates score to leaderboard only if it is better than user's previous score.</remarks>
         /// <remarks>There can only be Leaderboard.MaxEntries leaderboard entries stored at once. If the new score is the worst, it wont be saved</remarks>
-        private async void AddScoreToLeaders(string username, int score)
+        private async void AddScoreToLeaders(UserDetails user)
         {
             DatabaseReference leaderBoardRef = FirebaseDatabase.DefaultInstance.RootReference.Child("leaderboards");
             //Check if current user exists on server
@@ -179,14 +184,14 @@ namespace Data
                 await t;
                 if (t.Result == null || t.Result.GetRawJsonValue() == null)
                 {
-                    SetUserRecord(FirebaseAuth.DefaultInstance.CurrentUser, new UserDetails(username, score));
+                    SetUserRecord(CurrentUser.Value, user);
                 }
                 else
                 {
                     UserDetails u = JsonConvert.DeserializeObject<UserDetails>(t.Result.GetRawJsonValue());
 
-                    if (u.bestscore <= score) return; //user already had better score, early out
-                    SetUserRecord(FirebaseAuth.DefaultInstance.CurrentUser, new UserDetails(username, score));
+                    if (u.bestscore <= user.bestscore) return; //user already had better score, early out
+                    SetUserRecord(CurrentUser.Value, user);
                 }
             }
             catch (Exception e)
@@ -214,7 +219,7 @@ namespace Data
                     long worstScore = (long)((Dictionary<string, object>)entryWithWorstScore)["score"];
 
                     //new score is worse than existing scores, so we abort
-                    if (worstScore > score)
+                    if (worstScore > user.bestscore)
                         return TransactionResult.Abort();
                     else
                         leaders.Remove(entryWithWorstScore);
@@ -222,8 +227,8 @@ namespace Data
 
                 //we now know that the score can safely be added to leaderboard
                 Dictionary<string, object> newScore = new();
-                newScore["score"] = score;
-                newScore["username"] = username;
+                newScore["score"] = user.bestscore;
+                newScore["username"] = user.bestscore;
 
                 leaders.Add(newScore);
                 mutableData.Value = leaders;
@@ -259,7 +264,7 @@ namespace Data
         {
             Debug.Log("INIT DATABASE");
             CheckDependencyStatus();
-            User.Value = null;
+            CurrentUser.Value = null;
         }
         //private get of any arbitrary location in the database
         private Task<DataSnapshot> ReadDatabaseAsync(string path)
@@ -269,7 +274,7 @@ namespace Data
         //privately reads the database
         private Task<DataSnapshot> ReadUserAsync()
         {
-            return ReadDatabaseAsync("users/" + FirebaseAuth.DefaultInstance.CurrentUser.UserId + "/");
+            return ReadDatabaseAsync("users/" + CurrentUser.Value.UserId + "/");
         }
         //private get of Firebase leaderboard structure
         private Task<DataSnapshot> ReadLeaderboardAsync()

@@ -91,8 +91,8 @@ public class UIUserManager : MonoBehaviour
          * 
          * I subscribe to it here to display/hide a login prompt based on its state
          *********************************************************/
-        Database.Instance.User.Subscribe(_ => OnLogInStatusChanged(Database.Instance.IsSignedIn));
-        Database.Instance.User.Subscribe(u => OnUserNameChanged(u?.Email));
+        Database.Instance.CurrentUser.Subscribe(_ => OnLogInStatusChanged(Database.Instance.IsSignedIn));
+        Database.Instance.CurrentUser.Subscribe(u => OnUserNameChanged(u?.Email));
 
         //Check user input as the user types using  reactive observables
         NewUsername.OnValueChangedAsObservable().Subscribe(username => VerifyEmail(username));

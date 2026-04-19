@@ -228,7 +228,7 @@ namespace Data
                 //we now know that the score can safely be added to leaderboard
                 Dictionary<string, object> newScore = new();
                 newScore["score"] = user.bestscore;
-                newScore["username"] = user.bestscore;
+                newScore["username"] = user.Username;
 
                 leaders.Add(newScore);
                 mutableData.Value = leaders;

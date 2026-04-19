@@ -79,7 +79,7 @@ public class UIManager : SingletonMono<UIManager>
     {
         Debug.Log("Congrats dealt with");
         UICompletion.gameObject.SetActive(value);
-        congratsText.text = $"YOUR SCORE WAS:\r\n{Score.Total}\n   Check Leaderboard to compare!";
+        congratsText.text = $"YOUR SCORE WAS:\r\n{Score.CurrentRunScore}\n   Check Leaderboard to compare!";
     }
 
     void OnSceneChanged(Scene curr, Scene next){

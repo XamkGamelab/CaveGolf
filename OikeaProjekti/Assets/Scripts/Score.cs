@@ -7,35 +7,35 @@ namespace Data
     public class Score : MonoBehaviour
     {
 
-        public static int Local { get; private set; }
-        public static int Total { get; private set; }
+        public static int CurrentLevelScore { get; private set; }
+        public static int CurrentRunScore { get; private set; }
         public static ReactiveProperty<bool> GameCompleted = new(false);
 
         public static void Add(int i)
         {
-            Local += i;
+            CurrentLevelScore += i;
             if (Instance != null)
-                Instance.UI_UPADTE();
+                Instance.UpdateUI();
         }
 
         public static void UpdateTotal()
         {
-            Total += Local;
-            Local = 0;
+            CurrentRunScore += CurrentLevelScore;
+            CurrentLevelScore = 0;
             if (Instance != null)
-                Instance.UI_UPADTE();
+                Instance.UpdateUI();
         }
         public static void Reset()
         {
-            Total = 0;
-            Local = 0;
-            Instance?.UI_UPADTE();
+            CurrentRunScore = 0;
+            CurrentLevelScore = 0;
+            Instance?.UpdateUI();
             GameCompleted.Value = false;
         }
         public static void OnFinishGame()
         {
             GameCompleted.Value = true;
-            Data.Database.Instance.RecordScore(Total);
+            Data.Database.Instance.RecordScore(CurrentRunScore);
         }
         // things used by instances of script, should not be accessed elsewhere
 
@@ -43,10 +43,10 @@ namespace Data
         static Score Instance;
         [HideInInspector]
         TextMeshProUGUI text;
-        void UI_UPADTE()
+        void UpdateUI()
         {
-            string totalString = Total.ToString();
-            string localString = "+" + Local.ToString("#0");
+            string totalString = CurrentRunScore.ToString();
+            string localString = "+" + CurrentLevelScore.ToString("#0");
 
             while (totalString.Length != localString.Length)
             {
@@ -64,7 +64,7 @@ namespace Data
         void Start()
         {
             text = GetComponent<TextMeshProUGUI>();
-            UI_UPADTE();
+            UpdateUI();
             Instance = this;
         }
     }

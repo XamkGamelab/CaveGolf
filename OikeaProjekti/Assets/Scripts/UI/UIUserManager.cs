@@ -47,6 +47,7 @@ public class UIUserManager : MonoBehaviour
     public async void ShowLeaderboard()
     {
         Leaderboard leaderboard = await Database.Instance.GetLeaderboardAsync();
+        if(leaderboard is null) return;
         if(leaderboardEntries is not null)
         {
             foreach(var e in leaderboardEntries)
@@ -90,14 +91,14 @@ public class UIUserManager : MonoBehaviour
          * 
          * I subscribe to it here to display/hide a login prompt based on its state
          *********************************************************/
-        Database.Instance.User.Subscribe(_ => OnLogInStatusChanged(Database.Instance.SignedIn));
+        Database.Instance.User.Subscribe(_ => OnLogInStatusChanged(Database.Instance.IsSignedIn));
         Database.Instance.User.Subscribe(u => OnUserNameChanged(u?.Email));
 
         //Check user input as the user types using  reactive observables
         NewUsername.OnValueChangedAsObservable().Subscribe(username => VerifyEmail(username));
         NewPassword.OnValueChangedAsObservable().Subscribe(password => VerifyPassword(password));
 
-        if (!Database.Instance.SignedIn) {SignInSignUpPanel.gameObject.SetActive(true);}
+        if (!Database.Instance.IsSignedIn) {SignInSignUpPanel.gameObject.SetActive(true);}
     }
     //Helper function to organize adding listeneres to all buttons
     void InitButtons()

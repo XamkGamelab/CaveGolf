@@ -8,11 +8,11 @@ public class Hole : MonoBehaviour
     TextMeshPro flagText;
     private void OnTriggerEnter2D()
     {
-        Score.UpdateTotal();
+        Data.Score.UpdateTotal();
         if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings-1)
         {
             SceneManager.LoadScene(0);
-            Score.OnFinishGame();
+            Data.Score.OnFinishGame();
         }
         else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

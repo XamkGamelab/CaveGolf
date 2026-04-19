@@ -111,7 +111,7 @@ public class BallMovement : MonoBehaviour
     {
         //cant launch just yet
         if (rb.linearVelocity.magnitude > 0 || standstilltime < StandStillTimeLimit) return;
-        Score.Add(1);
+        Data.Score.Add(1);
         audioManager?.PlaySFX(audioManager.throwBall);
 
         rb.simulated = true;

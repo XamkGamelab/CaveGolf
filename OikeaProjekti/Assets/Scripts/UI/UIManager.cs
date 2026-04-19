@@ -3,9 +3,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UniRx;
-using UniRx.Triggers;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
+using Data;
 public class UIManager : SingletonMono<UIManager>
 {
     [SerializeField]UIUserManager UserManagerPrefab;

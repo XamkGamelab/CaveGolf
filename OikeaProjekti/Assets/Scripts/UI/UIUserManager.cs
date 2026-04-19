@@ -4,8 +4,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
-using System;
-
+using Data;
 public class UIUserManager : MonoBehaviour
 {
     //all relevant UI items

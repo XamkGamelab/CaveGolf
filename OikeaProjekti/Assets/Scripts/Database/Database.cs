@@ -46,13 +46,21 @@ namespace Data
         public async Task<Leaderboard> GetLeaderboardAsync()
         {
             var ds = ReadLeaderboardAsync();
-            await ds;
-            string updateResult = "{\"leaderboards\":" + ds.Result.GetRawJsonValue() + "}";
-            if (updateResult is null || updateResult.Length == 0) return null;
-            Debug.Log("JSON : " + updateResult);
-            Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(updateResult);
-            leaderboard.leaderboards = leaderboard.leaderboards.OrderBy(l => l.Score).ToList();
-            return leaderboard;
+            try
+            {
+                await ds;
+                string updateResult = "{\"leaderboards\":" + ds.Result.GetRawJsonValue() + "}";
+                if (updateResult is null || updateResult.Length == 0) return null;
+                Debug.Log("JSON : " + updateResult);
+                Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(updateResult);
+                leaderboard.leaderboards = leaderboard.leaderboards?.OrderBy(l => l.Score).ToList();
+                return leaderboard;
+            }
+            catch(System.Exception ex)
+            {
+                // Debug.LogException(ex);
+                return null;
+            }
         }
         /// <summary>
         /// Fetches the current user's details, and returns them via a callback action

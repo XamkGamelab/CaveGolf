@@ -14,7 +14,7 @@
 # docfx things
 /_site/
 /Documentation/api/
-
+leaderboard.json
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
 *.blend1
 *.blend1.meta

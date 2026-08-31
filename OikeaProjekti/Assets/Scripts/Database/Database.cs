@@ -1,14 +1,10 @@
-using Firebase.Auth;
-using Firebase.Extensions;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UniRx;
-using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using UnityEngine.SocialPlatforms.Impl;
 using System.IO;
 
 namespace Data
